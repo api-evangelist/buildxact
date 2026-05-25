@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/buildxact/main/json-schema/buildxact-estimate-item-schema.json",
+  "title": "Buildxact Estimate Item",
+  "description": "A line item on a Buildxact estimate — material, labor, subcontractor, or assembly. Mirrors the Estimate Item resource exposed by api.buildxact.com.",
+  "type": "object",
+  "required": ["id"],
+  "properties": {
+    "id": { "type": "string" },
+    "estimateId": { "type": "string" },
+    "description": { "type": "string" },
+    "category": {
+      "type": "string",
+      "description": "Cost category.",
+      "enum": ["Materials", "Labor", "Subcontractor", "Equipment", "Assembly", "Other"]
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit of measure (e.g. each, hour, m2, lf)."
+    },
+    "quantity": { "type": "number" },
+    "unitCost": {
+      "type": "number",
+      "description": "Per-unit cost before markup and tax."
+    },
+    "total": {
+      "type": "number",
+      "description": "Quantity multiplied by unit cost, before markup."
+    },
+    "markup": {
+      "type": "number",
+      "description": "Markup amount applied to this line."
+    },
+    "totalIncMarkup": {
+      "type": "number",
+      "description": "Line total inclusive of markup, exclusive of tax."
+    },
+    "totalIncTax": {
+      "type": "number",
+      "description": "Line total inclusive of markup and tax."
+    },
+    "taxContext": {
+      "type": "object",
+      "properties": {
+        "taxRateId": { "type": "string" },
+        "taxRate": { "type": "number" },
+        "pricesIncludeTax": { "type": "boolean" }
+      }
+    }
+  }
+}

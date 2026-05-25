@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/buildxact/main/json-schema/buildxact-estimate-schema.json",
+  "title": "Buildxact Estimate",
+  "description": "A Buildxact construction estimate — the priced document a builder issues to a client capturing scope, line items, markup, and tax. Mirrors the Estimate resource exposed by api.buildxact.com.",
+  "type": "object",
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Estimate identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable estimate name."
+    },
+    "jobId": {
+      "type": "string",
+      "description": "Identifier of the parent job, if any."
+    },
+    "customerId": {
+      "type": "string",
+      "description": "Identifier of the customer this estimate is for."
+    },
+    "status": {
+      "type": "string",
+      "description": "Estimate status.",
+      "enum": ["Draft", "Sent", "Accepted", "Declined", "Expired", "Archived"]
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code applied to monetary fields."
+    },
+    "total": {
+      "type": "number",
+      "description": "Subtotal of all items before markup and tax."
+    },
+    "markup": {
+      "type": "number",
+      "description": "Markup amount applied on top of the subtotal."
+    },
+    "totalIncMarkup": {
+      "type": "number",
+      "description": "Subtotal plus markup, exclusive of tax."
+    },
+    "taxIncMarkup": {
+      "type": "number",
+      "description": "Tax amount calculated on the markup-inclusive total."
+    },
+    "totalIncMarkupTax": {
+      "type": "number",
+      "description": "Grand total including markup and tax."
+    },
+    "taxContext": {
+      "type": "object",
+      "description": "Tax inclusivity context for the estimate.",
+      "properties": {
+        "taxRateId": { "type": "string" },
+        "taxRate": { "type": "number" },
+        "pricesIncludeTax": { "type": "boolean" }
+      }
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "modifiedAt": { "type": "string", "format": "date-time" }
+  }
+}

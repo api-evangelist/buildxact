@@ -1,0 +1,78 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "buildxact": "https://api.buildxact.com/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Estimate": {
+      "@id": "buildxact:Estimate",
+      "@context": {
+        "id": { "@id": "buildxact:Estimate/id", "@type": "xsd:string" },
+        "name": { "@id": "schema:name", "@type": "xsd:string" },
+        "jobId": { "@id": "buildxact:Estimate/jobId", "@type": "xsd:string" },
+        "customerId": { "@id": "buildxact:Estimate/customerId", "@type": "xsd:string" },
+        "status": { "@id": "buildxact:Estimate/status", "@type": "xsd:string" },
+        "currency": { "@id": "schema:priceCurrency", "@type": "xsd:string" },
+        "total": { "@id": "buildxact:Estimate/total", "@type": "xsd:decimal" },
+        "markup": { "@id": "buildxact:Estimate/markup", "@type": "xsd:decimal" },
+        "totalIncMarkup": { "@id": "buildxact:Estimate/totalIncMarkup", "@type": "xsd:decimal" },
+        "taxIncMarkup": { "@id": "buildxact:Estimate/taxIncMarkup", "@type": "xsd:decimal" },
+        "totalIncMarkupTax": { "@id": "schema:price", "@type": "xsd:decimal" },
+        "taxContext": { "@id": "buildxact:Estimate/taxContext", "@type": "buildxact:TaxContext" },
+        "createdAt": { "@id": "schema:dateCreated", "@type": "xsd:dateTime" },
+        "modifiedAt": { "@id": "schema:dateModified", "@type": "xsd:dateTime" }
+      }
+    },
+
+    "EstimateItem": {
+      "@id": "buildxact:EstimateItem",
+      "@context": {
+        "id": { "@id": "buildxact:EstimateItem/id", "@type": "xsd:string" },
+        "estimateId": { "@id": "buildxact:EstimateItem/estimateId", "@type": "xsd:string" },
+        "description": { "@id": "schema:description", "@type": "xsd:string" },
+        "category": { "@id": "schema:category", "@type": "xsd:string" },
+        "unit": { "@id": "schema:unitText", "@type": "xsd:string" },
+        "quantity": { "@id": "buildxact:EstimateItem/quantity", "@type": "xsd:decimal" },
+        "unitCost": { "@id": "buildxact:EstimateItem/unitCost", "@type": "xsd:decimal" },
+        "total": { "@id": "buildxact:EstimateItem/total", "@type": "xsd:decimal" },
+        "markup": { "@id": "buildxact:EstimateItem/markup", "@type": "xsd:decimal" },
+        "totalIncMarkup": { "@id": "buildxact:EstimateItem/totalIncMarkup", "@type": "xsd:decimal" },
+        "totalIncTax": { "@id": "buildxact:EstimateItem/totalIncTax", "@type": "xsd:decimal" }
+      }
+    },
+
+    "TaxContext": {
+      "@id": "buildxact:TaxContext",
+      "@context": {
+        "taxRateId": { "@id": "buildxact:TaxContext/taxRateId", "@type": "xsd:string" },
+        "taxRate": { "@id": "buildxact:TaxContext/taxRate", "@type": "xsd:decimal" },
+        "pricesIncludeTax": { "@id": "buildxact:TaxContext/pricesIncludeTax", "@type": "xsd:boolean" }
+      }
+    },
+
+    "TaxRate": {
+      "@id": "buildxact:TaxRate",
+      "@context": {
+        "id": { "@id": "buildxact:TaxRate/id", "@type": "xsd:string" },
+        "name": { "@id": "schema:name", "@type": "xsd:string" },
+        "rate": { "@id": "buildxact:TaxRate/rate", "@type": "xsd:decimal" },
+        "isDefault": { "@id": "buildxact:TaxRate/isDefault", "@type": "xsd:boolean" }
+      }
+    },
+
+    "Lead": {
+      "@id": "buildxact:Lead",
+      "@context": {
+        "leadId": { "@id": "buildxact:Lead/id", "@type": "xsd:string" },
+        "customerName": { "@id": "schema:name", "@type": "xsd:string" },
+        "customerEmail": { "@id": "schema:email", "@type": "xsd:string" },
+        "projectAddress": { "@id": "schema:address", "@type": "xsd:string" },
+        "source": { "@id": "buildxact:Lead/source", "@type": "xsd:string" },
+        "status": { "@id": "buildxact:Lead/status", "@type": "xsd:string" }
+      }
+    }
+  }
+}

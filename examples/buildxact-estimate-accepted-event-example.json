@@ -1,0 +1,31 @@
+{
+  "operation": "Webhook delivery — estimate.accepted",
+  "request": {
+    "method": "POST",
+    "url": "https://partner.example.com/webhooks/buildxact",
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Buildxact-Event": "estimate.accepted",
+      "X-Buildxact-Signature": "sha256=8f4c0c1a6b3e0b3c6f1f8c2d8d4e3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f"
+    },
+    "body": {
+      "eventId": "evt_01HZX9B2C4D6E8F0G2H4J6K8L0",
+      "eventType": "estimate.accepted",
+      "tenantId": "tenant_buildxact_demo",
+      "occurredAt": "2026-05-24T22:14:58Z",
+      "data": {
+        "estimateId": "est_01HZX2K8M2N4P7Q1R3S5T7V9W2",
+        "jobId": "job_01HZX1A2B3C4D5E6F7G8H9JKLM",
+        "customerId": "cust_01HZWZ9Y8X7W6V5U4T3S2R1QPN",
+        "totalIncMarkupTax": 111210.00,
+        "acceptedAt": "2026-05-24T22:14:50Z"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "received": true
+    }
+  }
+}

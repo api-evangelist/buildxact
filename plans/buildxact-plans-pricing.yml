@@ -1,0 +1,146 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+provider: Buildxact
+providerId: buildxact
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Construction
+  - Estimating
+  - Job Management
+  - SaaS
+description: >-
+  Buildxact subscription plans for residential builders, remodelers, and
+  trade contractors. Prices reflect the US storefront at
+  buildxact.com/us/pricing and the comparison article at
+  help.buildxact.com (Foundation / Pro / Master). Annual billing yields a
+  ~15% discount over monthly billing. Merchant and Manufacturer plans —
+  not shown here — are negotiated with Buildxact's partner team and unlock
+  additional webhook event types.
+sources:
+  - https://www.buildxact.com/us/pricing/
+  - https://help.buildxact.com/en/articles/11559145-which-buildxact-subscription-plan-is-right-for-my-business
+  - https://help.buildxact.com/en/articles/4330803-buildxact-sample-plans-pricing
+plans:
+  - id: buildxact-foundation
+    name: Foundation
+    type: subscription
+    description: >-
+      Quick-quoting tier for builders, general contractors, and specialist
+      trades. Includes lead management, digital takeoffs and estimating,
+      customizable quote letters with digital signatures, supplier/dealer
+      integration, purchase orders, and the Blu Assembly/Recipe Assistant.
+      Does not include job management or scheduling features.
+    entries:
+      - label: Monthly billing
+        name: monthly
+        type: flat
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: '199'
+        currency: USD
+        userMultiplied: false
+      - label: Annual billing (per month, billed annually)
+        name: annual
+        type: flat
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: '169'
+        currency: USD
+        userMultiplied: false
+  - id: buildxact-pro
+    name: Pro
+    type: subscription
+    description: >-
+      For builders and contractors managing multiple projects and teams.
+      Adds full job management, Gantt scheduling, change orders, native
+      timesheets, enhanced digital signatures, the Blu Estimate Generator,
+      and customer communications (portal + selections). Blu Takeoff
+      Assistant ($99/mo) and Blu Estimate Reviewer ($149/mo) available as
+      paid add-ons.
+    entries:
+      - label: Monthly billing
+        name: monthly
+        type: flat
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: '399'
+        currency: USD
+        userMultiplied: false
+      - label: Annual billing (per month, billed annually)
+        name: annual
+        type: flat
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: '339'
+        currency: USD
+        userMultiplied: false
+      - label: Blu Takeoff Assistant add-on
+        name: blu_takeoff_addon
+        type: flat
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: '99'
+        currency: USD
+        userMultiplied: false
+      - label: Blu Estimate Reviewer add-on
+        name: blu_reviewer_addon
+        type: flat
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: '149'
+        currency: USD
+        userMultiplied: false
+  - id: buildxact-master
+    name: Master
+    type: subscription
+    description: >-
+      Top tier for established builders and contractors with large teams.
+      Includes all Pro features plus all Blu AI tools (Estimate Generator,
+      Takeoff Assistant, Estimate Reviewer), priority support, user access
+      controls, and accounting integrations (Xero, QuickBooks Online).
+    entries:
+      - label: Monthly billing
+        name: monthly
+        type: flat
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: '599'
+        currency: USD
+        userMultiplied: false
+      - label: Annual billing (per month, billed annually)
+        name: annual
+        type: flat
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: '509'
+        currency: USD
+        userMultiplied: false
+  - id: buildxact-trial
+    name: Free Trial
+    type: trial
+    description: 14-day free trial of the Buildxact platform.
+    entries:
+      - label: Trial period
+        name: trial
+        type: flat
+        timeFrame: trial
+        geo: global
+        unit: 14
+        price: '0'
+        currency: USD
+        userMultiplied: false
+notes:
+  - Additional users can be added to each plan for an extra monthly fee (variable, contact sales).
+  - Plans listed in USD reflect the US storefront; AU/UK/NZ/CA storefronts publish equivalent local pricing.
+  - Buildxact states there are no hidden fees — upgrades, maintenance, support, and training are included.
+  - Merchant and Manufacturer partner plans (suppliers of building materials) are quoted separately and unlock additional webhook events beyond the customer-facing tiers.

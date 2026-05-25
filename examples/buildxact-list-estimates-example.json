@@ -1,0 +1,59 @@
+{
+  "operation": "GET /estimates?$top=2&$count=true",
+  "request": {
+    "headers": {
+      "Ocp-Apim-Subscription-Key": "{partner-subscription-key}",
+      "Authorization": "Bearer {user-access-token}",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "x-odata-total-count": "47"
+    },
+    "body": [
+      {
+        "id": "est_01HZX2K8M2N4P7Q1R3S5T7V9W2",
+        "name": "Smith Residence — Kitchen Remodel",
+        "jobId": "job_01HZX1A2B3C4D5E6F7G8H9JKLM",
+        "customerId": "cust_01HZWZ9Y8X7W6V5U4T3S2R1QPN",
+        "status": "Sent",
+        "currency": "AUD",
+        "total": 84250.00,
+        "markup": 16850.00,
+        "totalIncMarkup": 101100.00,
+        "taxIncMarkup": 10110.00,
+        "totalIncMarkupTax": 111210.00,
+        "taxContext": {
+          "taxRateId": "tax_gst_au_10",
+          "taxRate": 0.10,
+          "pricesIncludeTax": false
+        },
+        "createdAt": "2026-05-12T03:11:42Z",
+        "modifiedAt": "2026-05-21T22:48:09Z"
+      },
+      {
+        "id": "est_01HZX4N6P8Q2R4S6T8V1W3Y5Z7",
+        "name": "Brown Family — Two-Storey Extension",
+        "jobId": null,
+        "customerId": "cust_01HZWY5T4S3R2Q1P0N9M8L7K6J",
+        "status": "Draft",
+        "currency": "AUD",
+        "total": 312900.00,
+        "markup": 78225.00,
+        "totalIncMarkup": 391125.00,
+        "taxIncMarkup": 39112.50,
+        "totalIncMarkupTax": 430237.50,
+        "taxContext": {
+          "taxRateId": "tax_gst_au_10",
+          "taxRate": 0.10,
+          "pricesIncludeTax": false
+        },
+        "createdAt": "2026-05-23T08:02:15Z",
+        "modifiedAt": "2026-05-25T01:17:33Z"
+      }
+    ]
+  }
+}

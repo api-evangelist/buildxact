@@ -1,0 +1,149 @@
+asyncapi: 2.6.0
+info:
+  title: Buildxact Webhooks
+  version: '1.0'
+  description: >-
+    Buildxact webhook delivery channel. Subscribers register a target URL
+    inside the Buildxact web app ("My Business > API"), pick the events
+    they want, and verify each payload with a signing secret. Some events
+    are only available to Merchant and Manufacturer subscription tiers.
+defaultContentType: application/json
+servers:
+  partner:
+    url: '{webhookUrl}'
+    protocol: https
+    description: Subscriber's HTTPS endpoint that Buildxact POSTs events to.
+    variables:
+      webhookUrl:
+        default: https://example.com/buildxact-webhook
+        description: HTTPS URL the partner controls.
+channels:
+  estimate.accepted:
+    description: Fired when a customer accepts an estimate.
+    subscribe:
+      operationId: onEstimateAccepted
+      summary: Estimate Accepted
+      message:
+        $ref: '#/components/messages/EstimateAccepted'
+  lead.created:
+    description: Fired when a new lead is captured in Buildxact.
+    subscribe:
+      operationId: onLeadCreated
+      summary: Lead Created
+      message:
+        $ref: '#/components/messages/LeadCreated'
+  lead.updated:
+    description: Fired when an existing lead is modified.
+    subscribe:
+      operationId: onLeadUpdated
+      summary: Lead Updated
+      message:
+        $ref: '#/components/messages/LeadUpdated'
+components:
+  messages:
+    EstimateAccepted:
+      name: EstimateAccepted
+      title: Estimate Accepted
+      summary: Customer accepted an estimate.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Buildxact-Signature:
+            type: string
+            description: HMAC signature computed with the webhook signing secret.
+          X-Buildxact-Event:
+            type: string
+            example: estimate.accepted
+      payload:
+        $ref: '#/components/schemas/EstimateEvent'
+    LeadCreated:
+      name: LeadCreated
+      title: Lead Created
+      summary: A new lead was captured.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Buildxact-Signature:
+            type: string
+          X-Buildxact-Event:
+            type: string
+            example: lead.created
+      payload:
+        $ref: '#/components/schemas/LeadEvent'
+    LeadUpdated:
+      name: LeadUpdated
+      title: Lead Updated
+      summary: An existing lead was modified.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Buildxact-Signature:
+            type: string
+          X-Buildxact-Event:
+            type: string
+            example: lead.updated
+      payload:
+        $ref: '#/components/schemas/LeadEvent'
+  schemas:
+    EventEnvelope:
+      type: object
+      properties:
+        eventId:
+          type: string
+        eventType:
+          type: string
+        tenantId:
+          type: string
+        occurredAt:
+          type: string
+          format: date-time
+    EstimateEvent:
+      allOf:
+        - $ref: '#/components/schemas/EventEnvelope'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                estimateId:
+                  type: string
+                jobId:
+                  type: string
+                customerId:
+                  type: string
+                totalIncMarkupTax:
+                  type: number
+                  format: double
+                acceptedAt:
+                  type: string
+                  format: date-time
+    LeadEvent:
+      allOf:
+        - $ref: '#/components/schemas/EventEnvelope'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                leadId:
+                  type: string
+                customerName:
+                  type: string
+                customerEmail:
+                  type: string
+                  format: email
+                projectAddress:
+                  type: string
+                source:
+                  type: string
+                status:
+                  type: string
+                createdAt:
+                  type: string
+                  format: date-time
+                modifiedAt:
+                  type: string
+                  format: date-time

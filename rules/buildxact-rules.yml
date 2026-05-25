@@ -1,0 +1,56 @@
+extends:
+  - spectral:oas
+rules:
+  buildxact-info-contact:
+    description: All Buildxact OpenAPI documents should declare an info.contact with a URL pointing to the developer portal.
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+  buildxact-summary-title-case:
+    description: Operation summaries must use Title Case (matches the rest of the api-evangelist catalog).
+    given: $.paths.*[get,put,post,delete,patch,options,head].summary
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: '^([A-Z][a-z0-9]*)(\s[A-Z][a-z0-9]*)*$|^([A-Z][A-Za-z0-9]*\s)+([A-Z][A-Za-z0-9]*)$|^([A-Z][A-Za-z0-9]+)(\s+([A-Z][A-Za-z0-9]+|by|with|of|the|and|to|in|on|for|a|an))*$'
+  buildxact-operation-tags:
+    description: Every Buildxact operation must declare at least one tag so it can be grouped in docs.
+    given: $.paths.*[get,put,post,delete,patch,options,head]
+    severity: error
+    then:
+      field: tags
+      function: length
+      functionOptions:
+        min: 1
+  buildxact-operation-description:
+    description: Operations should describe what they do and call out OData support where applicable.
+    given: $.paths.*[get,put,post,delete,patch,options,head]
+    severity: warn
+    then:
+      field: description
+      function: truthy
+  buildxact-security-headers:
+    description: Buildxact uses Azure API Management — every operation must require both a subscription key and a bearer token.
+    given: $
+    severity: warn
+    then:
+      field: security
+      function: truthy
+  buildxact-odata-page-size:
+    description: Collection list endpoints should expose $top, $skip, and $count parameters.
+    given: $.paths[?(@property =~ /^\/.*s$/)].get.parameters[*].name
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(\$filter|\$orderBy|\$top|\$skip|\$count)$'
+  buildxact-rate-limit-response:
+    description: Operations should document a 429 response since Buildxact enforces 100 requests / 30 seconds.
+    given: $.paths.*[get,put,post,delete,patch].responses
+    severity: info
+    then:
+      field: '429'
+      function: truthy

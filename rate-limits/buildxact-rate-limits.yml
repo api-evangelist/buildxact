@@ -1,0 +1,31 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: Buildxact
+providerId: buildxact
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Construction
+  - Rate Limiting
+  - Quotas
+description: >-
+  Documented rate limits for the Buildxact Public API. Buildxact's gateway
+  enforces a sliding-window cap of 100 HTTP requests per 30-second period
+  per subscription key. Exceeding the limit returns HTTP 429.
+sources:
+  - https://developer.buildxact.com/getting-started
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+algorithm: sliding-window
+limits:
+  - tier: All Subscribers
+    scope: per-subscription-key
+    requests: 100
+    period: 30s
+    description: 100 requests in any rolling 30-second window across all endpoints.
+notes:
+  - Limits are enforced at the Azure API Management gateway layer.
+  - Clients should back off on HTTP 429 and respect any Retry-After header.
+  - OData paging ($top, $skip) lets clients chunk large result sets within the request budget.

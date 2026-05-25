@@ -1,0 +1,172 @@
+aid: buildxact
+name: Buildxact
+description: >-
+  Buildxact is a Melbourne, Australia-headquartered construction estimating
+  and project management SaaS for residential builders, remodelers, trade
+  contractors, and building-material suppliers. Founded in 2011, the company
+  operates regional offices in Austin, Texas (North America), and serves
+  customers across Australia, New Zealand, the United Kingdom, the United
+  States, and Canada. The platform spans the full residential job lifecycle —
+  lead capture, digital takeoffs, AI-assisted estimating ("Blu"), customer
+  quoting and e-signatures, supplier/dealer price-list integration, purchase
+  orders, scheduling (Gantt), timesheets, variations/change orders,
+  invoicing, and two-way accounting sync with Xero and QuickBooks Online.
+  Buildxact exposes a public REST API and webhook surface at
+  developer.buildxact.com, available to Merchant and Manufacturer partners as
+  well as customer subscribers, using a Microsoft Azure API Management
+  gateway (Ocp-Apim-Subscription-Key + bearer token). Endpoints support OData
+  filtering and sorting, with a separate UAT/staging environment. In 2024,
+  Autodesk announced an agreement to acquire Buildxact, positioning the
+  product as a residential construction front-end alongside Autodesk's
+  broader AEC portfolio.
+type: Provider
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Construction
+  - Residential Construction
+  - Construction Management
+  - Estimating
+  - Takeoffs
+  - Job Management
+  - Project Management
+  - Quoting
+  - Scheduling
+  - Purchase Orders
+  - Invoicing
+  - Supplier Integration
+  - Material Pricing
+  - Builders
+  - Remodelers
+  - Trades
+  - SaaS
+  - Australia
+  - Autodesk
+url: https://raw.githubusercontent.com/api-evangelist/buildxact/refs/heads/main/apis.yml
+created: '2026-05-25'
+modified: '2026-05-25'
+specificationVersion: '0.20'
+apis:
+  - aid: buildxact:buildxact-public-api
+    name: Buildxact Public API
+    description: >-
+      Buildxact's public REST API exposes core construction-job data
+      including estimates and estimate items, with related tax-context and
+      reference data. The API is fronted by Azure API Management; every
+      request must carry an Ocp-Apim-Subscription-Key header identifying the
+      partner organization and an Authorization: Bearer access token scoped
+      to a Buildxact user and tenant. Endpoints follow REST conventions with
+      OData query support — $filter, $orderBy, $top, $skip, and $count=true
+      (record total returned via the x-odata-total-count response header).
+      A staging environment is available at developer-uat.buildxact.com.
+      Rate-limited at 100 requests per 30-second window.
+    humanURL: https://developer.buildxact.com/apis
+    baseURL: https://api.buildxact.com
+    version: v3
+    tags:
+      - Construction
+      - Estimates
+      - Estimate Items
+      - REST
+      - OData
+    properties:
+      - type: Documentation
+        url: https://developer.buildxact.com/getting-started
+      - type: Documentation
+        url: https://developer.buildxact.com/apis
+      - type: Documentation
+        url: https://developer.buildxact.com/estimate-data
+      - type: Authentication
+        url: https://developer.buildxact.com/authorization
+      - type: SignUp
+        url: https://developer.buildxact.com/signup
+      - type: Plans
+        url: https://developer.buildxact.com/plans
+      - type: HelpCenter
+        url: https://help.buildxact.com/en/articles/4510284-buildxact-application-programming-interface-api
+      - type: OpenAPI
+        url: openapi/buildxact-public-api-openapi.yml
+      - type: JSONSchema
+        url: json-schema/buildxact-estimate-schema.json
+      - type: JSONSchema
+        url: json-schema/buildxact-estimate-item-schema.json
+      - type: JSONLD
+        url: json-ld/buildxact-context.jsonld
+      - type: NaftikoCapability
+        url: capabilities/estimates.yaml
+      - type: Vocabulary
+        url: vocabulary/buildxact-vocabulary.yml
+      - type: RateLimits
+        url: rate-limits/buildxact-rate-limits.yml
+  - aid: buildxact:buildxact-webhooks
+    name: Buildxact Webhooks
+    description: >-
+      Buildxact's webhook surface lets partner and customer integrations
+      receive real-time notifications when events occur inside the
+      construction-management platform — including Estimate Accepted, Lead
+      Created, and Lead Updated, plus additional event types reserved for
+      Merchant and Manufacturer plan tiers. Webhooks are registered from the
+      "My Business > API" panel of the Buildxact web app: provide a
+      destination URL, choose events, store the signing secret used to
+      verify payload authenticity, and inspect deliveries via the built-in
+      Event Log. Payloads are JSON over HTTPS.
+    humanURL: https://developer.buildxact.com/webhooks
+    version: v1
+    tags:
+      - Webhooks
+      - Events
+      - Estimates
+      - Leads
+      - Event-Driven
+    properties:
+      - type: Documentation
+        url: https://developer.buildxact.com/webhooks
+      - type: AsyncAPI
+        url: asyncapi/buildxact-webhooks-asyncapi.yml
+      - type: NaftikoCapability
+        url: capabilities/webhooks.yaml
+common:
+  - type: Website
+    url: https://www.buildxact.com
+  - type: AustraliaSite
+    url: https://www.buildxact.com/au/
+  - type: USSite
+    url: https://www.buildxact.com/us/
+  - type: UKSite
+    url: https://www.buildxact.com/uk/
+  - type: DeveloperPortal
+    url: https://developer.buildxact.com
+  - type: HelpCenter
+    url: https://help.buildxact.com
+  - type: APIHelpArticle
+    url: https://help.buildxact.com/en/articles/4510284-buildxact-application-programming-interface-api
+  - type: Pricing
+    url: https://www.buildxact.com/us/pricing/
+  - type: Plans
+    url: https://help.buildxact.com/en/articles/11559145-which-buildxact-subscription-plan-is-right-for-my-business
+  - type: Integrations
+    url: https://www.buildxact.com/au/features/integrations/
+  - type: AccountingIntegrations
+    url: https://www.buildxact.com/us/features/construction-accounting-software/
+  - type: BluAI
+    url: https://www.buildxact.com/us/features/blu/
+  - type: Company
+    url: https://www.buildxact.com/au/company/
+  - type: Blog
+    url: https://www.buildxact.com/us/blog/
+  - type: Contact
+    url: https://www.buildxact.com/us/contact/
+  - type: Trial
+    url: https://www.buildxact.com/us/free-trial/
+  - type: LinkedIn
+    url: https://au.linkedin.com/company/buildxact
+  - type: GitHub
+    url: https://github.com/Buildxact
+  - type: TermsOfService
+    url: https://www.buildxact.com/au/terms-of-use/
+  - type: PrivacyPolicy
+    url: https://www.buildxact.com/au/privacy-policy/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

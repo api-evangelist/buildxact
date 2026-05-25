@@ -1,0 +1,99 @@
+specification: API Commons Vocabulary
+specificationVersion: '0.1'
+provider: Buildxact
+providerId: buildxact
+created: '2026-05-25'
+modified: '2026-05-25'
+description: >-
+  Buildxact domain vocabulary covering residential construction estimating
+  and job management — the terms surfaced through Buildxact's Public API,
+  Webhooks, and customer-facing UI.
+tags:
+  - Construction
+  - Residential Construction
+  - Estimating
+  - Project Management
+domains:
+  - name: Estimating
+    description: Producing priced quotes for residential construction work.
+    terms:
+      - Takeoff
+      - Estimate
+      - Estimate Item
+      - Assembly
+      - Recipe
+      - Unit Cost
+      - Markup
+      - Tax Context
+      - Tax-Inclusive
+      - Tax-Exclusive
+      - Quote
+      - Quote Letter
+      - Digital Signature
+  - name: Lead Management
+    description: Capturing and qualifying customer inquiries before quoting.
+    terms:
+      - Lead
+      - Lead Source
+      - Lead Status
+      - Client Portal
+      - Customer
+  - name: Job Management
+    description: Running the construction job once an estimate is accepted.
+    terms:
+      - Job
+      - Schedule
+      - Gantt Chart
+      - Change Order
+      - Variation
+      - Purchase Order
+      - Timesheet
+      - Invoice
+      - Progress Claim
+  - name: Supplier and Catalog
+    description: Material catalogs and live pricing from building-product dealers.
+    terms:
+      - Supplier
+      - Dealer
+      - Merchant
+      - Manufacturer
+      - Price List
+      - Catalog Item
+      - Live Pricing
+  - name: AI Assistance
+    description: Buildxact's "Blu" AI features for estimating and review.
+    terms:
+      - Blu Assembly Assistant
+      - Blu Estimate Generator
+      - Blu Takeoff Assistant
+      - Blu Estimate Reviewer
+  - name: API Surface
+    description: Developer-facing concepts on developer.buildxact.com.
+    terms:
+      - Subscription Key
+      - Bearer Token
+      - Refresh Token
+      - OData Filter
+      - OData OrderBy
+      - Webhook
+      - Signing Secret
+      - Event Log
+roles:
+  - Builder
+  - Remodeler
+  - General Contractor
+  - Specialist Trade
+  - Merchant
+  - Manufacturer
+  - Customer
+  - Partner Developer
+plans:
+  - Foundation
+  - Pro
+  - Master
+  - Merchant
+  - Manufacturer
+events:
+  - estimate.accepted
+  - lead.created
+  - lead.updated

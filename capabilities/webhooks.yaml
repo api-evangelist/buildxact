@@ -1,0 +1,52 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Buildxact — Webhooks
+  description: >-
+    Subscriber-side capability for receiving and verifying Buildxact webhook
+    deliveries (estimate.accepted, lead.created, lead.updated). Buildxact
+    POSTs JSON payloads to a partner-controlled HTTPS URL with an HMAC
+    signature header generated from a per-webhook signing secret.
+  tags:
+    - Buildxact
+    - Webhooks
+    - Events
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      BUILDXACT_WEBHOOK_SIGNING_SECRET: BUILDXACT_WEBHOOK_SIGNING_SECRET
+capability:
+  consumes: []
+  exposes:
+    - type: rest
+      namespace: buildxact-webhooks-rest
+      port: 8080
+      description: HTTPS endpoint Buildxact delivers webhook events to.
+      resources:
+        - path: /webhooks/buildxact
+          name: buildxact-webhook-receiver
+          description: Receives all Buildxact event types on a single endpoint.
+          operations:
+            - method: POST
+              name: receiveEvent
+              description: Receive and verify a Buildxact webhook payload (estimate.accepted, lead.created, lead.updated).
+              inputParameters:
+                - name: X-Buildxact-Signature
+                  in: header
+                  type: string
+                  description: HMAC signature computed by Buildxact using the webhook signing secret.
+                  required: true
+                - name: X-Buildxact-Event
+                  in: header
+                  type: string
+                  description: Event type identifier (e.g. estimate.accepted).
+                  required: true
+                - name: body
+                  in: body
+                  type: object
+                  description: Event envelope with eventId, eventType, tenantId, occurredAt, and a data object.
+                  required: true
+              outputParameters:
+                - type: object
+                  mapping: $.

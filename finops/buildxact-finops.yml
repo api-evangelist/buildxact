@@ -1,0 +1,87 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Buildxact
+providerId: buildxact
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+  - SaaS
+  - Construction
+description: >-
+  FOCUS-aligned FinOps definition for Buildxact subscriptions. Buildxact
+  is a seat-based SaaS subscription (Foundation / Pro / Master) priced
+  monthly or annually, with optional AI feature add-ons (Blu Takeoff
+  Assistant, Blu Estimate Reviewer). API access is included with the
+  subscription rather than metered separately; cost variability comes
+  from seat count and add-on usage.
+sources:
+  - https://www.buildxact.com/us/pricing/
+  - https://help.buildxact.com/en/articles/11559145-which-buildxact-subscription-plan-is-right-for-my-business
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Buildxact
+serviceCategory: Construction Management Software
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly or Annual
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Adjustment
+  primaryUnit: seat-month
+  secondaryUnits:
+    - add-on-month
+focusColumns:
+  ServiceName: Buildxact Platform
+  ServiceCategory: Construction Management Software
+  ProviderName: Buildxact
+  PublisherName: Buildxact
+  InvoiceIssuerName: Buildxact
+  PricingCategory: Subscription
+  PricingUnit: seat-month
+  BillingCurrency: USD
+meters:
+  - name: base_subscription
+    unit: seat-month
+    aggregation: count
+    dimensions:
+      - plan
+      - billing_cadence
+      - geo
+  - name: additional_user
+    unit: seat-month
+    aggregation: sum
+    dimensions:
+      - plan
+  - name: blu_takeoff_assistant
+    unit: addon-month
+    aggregation: sum
+    dimensions:
+      - plan
+  - name: blu_estimate_reviewer
+    unit: addon-month
+    aggregation: sum
+    dimensions:
+      - plan
+discounts:
+  - name: annual_commit
+    description: Annual billing discounts the listed monthly price by approximately 15%.
+    appliesTo:
+      - Foundation
+      - Pro
+      - Master
+recommendations:
+  - Right-size seats — review additional-user lines monthly; idle accounts can be archived.
+  - Pre-purchase annually if seat count is stable; the annual cadence saves ~15% vs monthly.
+  - Track Blu add-on usage against estimate volume; add-ons make sense when AI-assisted estimate output exceeds the manual baseline.
