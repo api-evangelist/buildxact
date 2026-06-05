@@ -1,24 +1,17 @@
 aid: buildxact
 name: Buildxact
 description: >-
-  Buildxact is a Melbourne, Australia-headquartered construction estimating
-  and project management SaaS for residential builders, remodelers, trade
-  contractors, and building-material suppliers. Founded in 2011, the company
-  operates regional offices in Austin, Texas (North America), and serves
-  customers across Australia, New Zealand, the United Kingdom, the United
-  States, and Canada. The platform spans the full residential job lifecycle —
-  lead capture, digital takeoffs, AI-assisted estimating ("Blu"), customer
-  quoting and e-signatures, supplier/dealer price-list integration, purchase
-  orders, scheduling (Gantt), timesheets, variations/change orders,
-  invoicing, and two-way accounting sync with Xero and QuickBooks Online.
-  Buildxact exposes a public REST API and webhook surface at
-  developer.buildxact.com, available to Merchant and Manufacturer partners as
-  well as customer subscribers, using a Microsoft Azure API Management
-  gateway (Ocp-Apim-Subscription-Key + bearer token). Endpoints support OData
-  filtering and sorting, with a separate UAT/staging environment. In 2024,
-  Autodesk announced an agreement to acquire Buildxact, positioning the
-  product as a residential construction front-end alongside Autodesk's
-  broader AEC portfolio.
+  Buildxact is a Melbourne, Australia-headquartered construction estimating and project management SaaS for residential
+  builders, remodelers, trade contractors, and building-material suppliers. Founded in 2011, the company operates
+  regional offices in Austin, Texas (North America), and serves customers across Australia, New Zealand, the United
+  Kingdom, the United States, and Canada. The platform spans the full residential job lifecycle — lead capture, digital
+  takeoffs, AI-assisted estimating ("Blu"), customer quoting and e-signatures, supplier/dealer price-list integration,
+  purchase orders, scheduling (Gantt), timesheets, variations/change orders, invoicing, and two-way accounting sync with
+  Xero and QuickBooks Online. Buildxact exposes a public REST API and webhook surface at developer.buildxact.com,
+  available to Merchant and Manufacturer partners as well as customer subscribers, using a Microsoft Azure API
+  Management gateway (Ocp-Apim-Subscription-Key + bearer token). Endpoints support OData filtering and sorting, with a
+  separate UAT/staging environment. In 2024, Autodesk announced an agreement to acquire Buildxact, positioning the
+  product as a residential construction front-end alongside Autodesk's broader AEC portfolio.
 type: Provider
 position: Provider
 access: 3rd-Party
@@ -51,16 +44,13 @@ apis:
   - aid: buildxact:buildxact-public-api
     name: Buildxact Public API
     description: >-
-      Buildxact's public REST API exposes core construction-job data
-      including estimates and estimate items, with related tax-context and
-      reference data. The API is fronted by Azure API Management; every
-      request must carry an Ocp-Apim-Subscription-Key header identifying the
-      partner organization and an Authorization: Bearer access token scoped
-      to a Buildxact user and tenant. Endpoints follow REST conventions with
-      OData query support — $filter, $orderBy, $top, $skip, and $count=true
-      (record total returned via the x-odata-total-count response header).
-      A staging environment is available at developer-uat.buildxact.com.
-      Rate-limited at 100 requests per 30-second window.
+      Buildxact's public REST API exposes core construction-job data including estimates and estimate items, with
+      related tax-context and reference data. The API is fronted by Azure API Management; every request must carry an
+      Ocp-Apim-Subscription-Key header identifying the partner organization and an Authorization: Bearer access token
+      scoped to a Buildxact user and tenant. Endpoints follow REST conventions with OData query support — $filter,
+      $orderBy, $top, $skip, and $count=true (record total returned via the x-odata-total-count response header). A
+      staging environment is available at developer-uat.buildxact.com. Rate-limited at 100 requests per 30-second
+      window.
     humanURL: https://developer.buildxact.com/apis
     baseURL: https://api.buildxact.com
     version: v3
@@ -93,8 +83,6 @@ apis:
         url: json-schema/buildxact-estimate-item-schema.json
       - type: JSONLD
         url: json-ld/buildxact-context.jsonld
-      - type: NaftikoCapability
-        url: capabilities/estimates.yaml
       - type: Vocabulary
         url: vocabulary/buildxact-vocabulary.yml
       - type: RateLimits
@@ -102,15 +90,12 @@ apis:
   - aid: buildxact:buildxact-webhooks
     name: Buildxact Webhooks
     description: >-
-      Buildxact's webhook surface lets partner and customer integrations
-      receive real-time notifications when events occur inside the
-      construction-management platform — including Estimate Accepted, Lead
-      Created, and Lead Updated, plus additional event types reserved for
-      Merchant and Manufacturer plan tiers. Webhooks are registered from the
-      "My Business > API" panel of the Buildxact web app: provide a
-      destination URL, choose events, store the signing secret used to
-      verify payload authenticity, and inspect deliveries via the built-in
-      Event Log. Payloads are JSON over HTTPS.
+      Buildxact's webhook surface lets partner and customer integrations receive real-time notifications when events
+      occur inside the construction-management platform — including Estimate Accepted, Lead Created, and Lead Updated,
+      plus additional event types reserved for Merchant and Manufacturer plan tiers. Webhooks are registered from the
+      "My Business > API" panel of the Buildxact web app: provide a destination URL, choose events, store the signing
+      secret used to verify payload authenticity, and inspect deliveries via the built-in Event Log. Payloads are JSON
+      over HTTPS.
     humanURL: https://developer.buildxact.com/webhooks
     version: v1
     tags:
@@ -124,8 +109,6 @@ apis:
         url: https://developer.buildxact.com/webhooks
       - type: AsyncAPI
         url: asyncapi/buildxact-webhooks-asyncapi.yml
-      - type: NaftikoCapability
-        url: capabilities/webhooks.yaml
 common:
   - type: Website
     url: https://www.buildxact.com
