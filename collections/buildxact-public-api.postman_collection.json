@@ -1,0 +1,2240 @@
+{
+  "item": [
+    {
+      "id": "1b56776f-7b89-49cf-80bf-e5de70634bb9",
+      "name": "Authentication",
+      "description": {
+        "content": "First-party login and bearer token refresh.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "51b7cad4-e751-496c-8470-fb3e11cb113d",
+          "name": "Login and Obtain Bearer Token",
+          "request": {
+            "name": "Login and Obtain Bearer Token",
+            "description": {
+              "content": "Exchange a Buildxact user email and plaintext API key for a short-lived bearer token plus refresh token. The subscription key header is still required to route the request through API Management.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "auth",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3c20c068-bf1f-47d4-9662-7b2e3e55b1ad",
+              "name": "Authentication succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accessToken\": \"string\",\n  \"refreshToken\": \"string\",\n  \"expiresIn\": 1986,\n  \"tokenType\": \"Bearer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18b74d27-009c-4f07-81b7-16b5391c5e6a",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "597e566e-fefc-4abf-b9b0-6f2c601f30b9",
+              "name": "Rate limit exceeded (100 requests per 30-second window).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "244d3d2a-1990-4da8-bbc9-bd29ef273428",
+          "name": "Refresh Bearer Token",
+          "request": {
+            "name": "Refresh Bearer Token",
+            "description": {
+              "content": "Exchange a refresh token for a new short-lived access token without re-prompting the user for credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "auth",
+                "refresh-token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5ebcc26c-b05c-43ea-bd0e-7d4ba91f0342",
+              "name": "New access token issued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "auth",
+                    "refresh-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accessToken\": \"string\",\n  \"refreshToken\": \"string\",\n  \"expiresIn\": 1986,\n  \"tokenType\": \"Bearer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c9d8ea7-f42c-4cc4-b299-9324a164f65a",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "auth",
+                    "refresh-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0f335e95-a95e-4965-9236-6419ae62377c",
+      "name": "Estimates",
+      "description": {
+        "content": "Construction estimates — the top-level pricing document for a job.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "db13b1f1-799e-4677-ba36-10eeb019c269",
+          "name": "List Estimates",
+          "request": {
+            "name": "List Estimates",
+            "description": {
+              "content": "Return a paginated list of estimates for the authenticated tenant. Supports OData $filter, $orderBy, $top, $skip, and $count.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "estimates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression (operators include eq, gt, lt, contains, in)."
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderBy",
+                  "value": "<string>",
+                  "description": "OData orderBy expression (e.g. fieldName asc, fieldName desc)."
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Page size — maximum records to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of records to skip for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "$count",
+                  "value": "<boolean>",
+                  "description": "When true, include the total record count in the x-odata-total-count response header."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b78f1ba-7abf-4054-86a5-a44465877f4d",
+              "name": "Estimate collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total estimate count when $count=true is supplied.",
+                  "key": "x-odata-total-count",
+                  "value": "5375"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"jobId\": \"string\",\n    \"customerId\": \"string\",\n    \"status\": \"string\",\n    \"currency\": \"string\",\n    \"total\": 5258.98983598261,\n    \"markup\": 1824.1616756405176,\n    \"totalIncMarkup\": 3279.3172227669943,\n    \"taxIncMarkup\": 5802.815264858985,\n    \"totalIncMarkupTax\": 5065.525685521276,\n    \"taxContext\": {\n      \"taxRateId\": \"<string>\",\n      \"taxRate\": \"<double>\",\n      \"pricesIncludeTax\": \"<boolean>\"\n    },\n    \"createdAt\": \"1955-12-18T01:45:25.061Z\",\n    \"modifiedAt\": \"2020-12-06T18:12:25.862Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"jobId\": \"string\",\n    \"customerId\": \"string\",\n    \"status\": \"string\",\n    \"currency\": \"string\",\n    \"total\": 2347.091036323734,\n    \"markup\": 2715.5726272800816,\n    \"totalIncMarkup\": 3754.7290050667225,\n    \"taxIncMarkup\": 5909.281871880503,\n    \"totalIncMarkupTax\": 3098.9422041141956,\n    \"taxContext\": {\n      \"taxRateId\": \"<string>\",\n      \"taxRate\": \"<double>\",\n      \"pricesIncludeTax\": \"<boolean>\"\n    },\n    \"createdAt\": \"1968-07-08T05:21:32.572Z\",\n    \"modifiedAt\": \"1982-04-27T12:21:37.427Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2ec1856-b555-4be4-b987-cb8ba6c1eb5a",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86bec1ba-b4ec-4c5d-b634-a532b03acab1",
+              "name": "Rate limit exceeded (100 requests per 30-second window).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "092d9a27-7534-4c0f-8146-9fd0d63f53d9",
+          "name": "Create Estimate",
+          "request": {
+            "name": "Create Estimate",
+            "description": {
+              "content": "Create a new construction estimate for the authenticated tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "estimates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"taxIncMarkup\": \"<double>\",\n  \"totalIncMarkupTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf067e53-10ca-4c95-89b1-80d0535822e3",
+              "name": "Estimate created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"taxIncMarkup\": \"<double>\",\n  \"totalIncMarkupTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"taxIncMarkup\": \"<double>\",\n  \"totalIncMarkupTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed6e7e6c-d350-48f9-ad26-bbd5c8413546",
+              "name": "Malformed request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"taxIncMarkup\": \"<double>\",\n  \"totalIncMarkupTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0aeabee-688b-4461-b0b9-f845a07e0450",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"taxIncMarkup\": \"<double>\",\n  \"totalIncMarkupTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7534c38-62c8-45b1-b763-58bf8e2d5fa8",
+          "name": "Get Estimate",
+          "request": {
+            "name": "Get Estimate",
+            "description": {
+              "content": "Return a single estimate by its identifier, including totals and tax context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "estimates",
+                ":estimateId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "estimateId",
+                  "description": "(Required) Unique identifier of the estimate."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4bb5b437-0df7-40ce-b213-ea224ba69047",
+              "name": "Estimate found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"taxIncMarkup\": \"<double>\",\n  \"totalIncMarkupTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efee89d1-272c-4311-8568-a34cf4cf63e1",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a36dd0c-fa7f-4a5e-89b1-8209156c4323",
+          "name": "Update Estimate",
+          "request": {
+            "name": "Update Estimate",
+            "description": {
+              "content": "Partially update fields on an existing estimate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "estimates",
+                ":estimateId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "estimateId",
+                  "description": "(Required) Unique identifier of the estimate."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"taxIncMarkup\": \"<double>\",\n  \"totalIncMarkupTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "325ab037-6854-4c75-a892-5e66041e93d4",
+              "name": "Estimate updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"taxIncMarkup\": \"<double>\",\n  \"totalIncMarkupTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"taxIncMarkup\": \"<double>\",\n  \"totalIncMarkupTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6effbf4-4ef8-4fe0-b087-f776a1cfd6ae",
+              "name": "Malformed request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"taxIncMarkup\": \"<double>\",\n  \"totalIncMarkupTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63dad676-b9c7-42b2-9ea7-ad9fe09f726f",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"taxIncMarkup\": \"<double>\",\n  \"totalIncMarkupTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a856d76d-743c-4aee-a1de-c6d24e941bd3",
+          "name": "Delete Estimate",
+          "request": {
+            "name": "Delete Estimate",
+            "description": {
+              "content": "Delete an estimate by identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "estimates",
+                ":estimateId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "estimateId",
+                  "description": "(Required) Unique identifier of the estimate."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efad20d4-ebb2-4d79-8b25-6af4d3bc5e12",
+              "name": "Estimate deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bb7bed74-fef0-4f5e-b6bd-20f7b0a586de",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4eb2fd32-1a36-48cb-918b-edf4b691f9ad",
+      "name": "Estimate Items",
+      "description": {
+        "content": "Line items inside an estimate (materials, labor, assemblies).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c7628294-170b-41d5-9b4c-cbd427e38b86",
+          "name": "List Estimate Items",
+          "request": {
+            "name": "List Estimate Items",
+            "description": {
+              "content": "Return the line items belonging to an estimate. Supports OData $filter, $orderBy, $top, $skip, and $count.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "estimates",
+                ":estimateId",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression (operators include eq, gt, lt, contains, in)."
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderBy",
+                  "value": "<string>",
+                  "description": "OData orderBy expression (e.g. fieldName asc, fieldName desc)."
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Page size — maximum records to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of records to skip for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "$count",
+                  "value": "<boolean>",
+                  "description": "When true, include the total record count in the x-odata-total-count response header."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "estimateId",
+                  "description": "(Required) Unique identifier of the estimate."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab1eeda0-852a-433c-b50b-60844d12177d",
+              "name": "Estimate item collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total item count when $count=true is supplied.",
+                  "key": "x-odata-total-count",
+                  "value": "5375"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"estimateId\": \"string\",\n    \"description\": \"string\",\n    \"category\": \"string\",\n    \"unit\": \"string\",\n    \"quantity\": 440.5901909250076,\n    \"unitCost\": 7993.224813357119,\n    \"total\": 3216.623301145001,\n    \"markup\": 6421.221414002437,\n    \"totalIncMarkup\": 4949.563134811733,\n    \"totalIncTax\": 7595.463728526315,\n    \"taxContext\": {\n      \"taxRateId\": \"string\",\n      \"taxRate\": 5918.975801275984,\n      \"pricesIncludeTax\": false\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"estimateId\": \"string\",\n    \"description\": \"string\",\n    \"category\": \"string\",\n    \"unit\": \"string\",\n    \"quantity\": 6608.110633947401,\n    \"unitCost\": 5066.51266421231,\n    \"total\": 9481.848389163843,\n    \"markup\": 949.979031059719,\n    \"totalIncMarkup\": 5661.533402782125,\n    \"totalIncTax\": 9475.58384713288,\n    \"taxContext\": {\n      \"taxRateId\": \"string\",\n      \"taxRate\": 3691.389944069924,\n      \"pricesIncludeTax\": true\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "baed29eb-8289-41f1-bb87-41c7b1bfc434",
+          "name": "Add Estimate Item",
+          "request": {
+            "name": "Add Estimate Item",
+            "description": {
+              "content": "Add a new line item to an estimate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "estimates",
+                ":estimateId",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "estimateId",
+                  "description": "(Required) Unique identifier of the estimate."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"estimateId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"category\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"unitCost\": \"<double>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"totalIncTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c4ae402a-4027-40b2-8b53-a0c79d48b370",
+              "name": "Estimate item created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"estimateId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"category\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"unitCost\": \"<double>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"totalIncTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"estimateId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"category\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"unitCost\": \"<double>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"totalIncTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e96ba62c-f10d-45b5-bd91-961a309ce166",
+          "name": "Get Estimate Item",
+          "request": {
+            "name": "Get Estimate Item",
+            "description": {
+              "content": "Return a single estimate line item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "estimates",
+                ":estimateId",
+                "items",
+                ":itemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "estimateId",
+                  "description": "(Required) Unique identifier of the estimate."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemId",
+                  "description": "(Required) Unique identifier of the estimate line item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52479c08-5ec9-4dd5-9022-c09633e863fb",
+              "name": "Estimate item found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) Unique identifier of the estimate line item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"estimateId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"category\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"unitCost\": \"<double>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"totalIncTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79293005-78e5-4fa6-88f0-aa9a17bb9b31",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) Unique identifier of the estimate line item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c59dcc06-7697-49e4-965f-bd16c88c6e1f",
+          "name": "Update Estimate Item",
+          "request": {
+            "name": "Update Estimate Item",
+            "description": {
+              "content": "Partially update an estimate line item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "estimates",
+                ":estimateId",
+                "items",
+                ":itemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "estimateId",
+                  "description": "(Required) Unique identifier of the estimate."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemId",
+                  "description": "(Required) Unique identifier of the estimate line item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"estimateId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"category\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"unitCost\": \"<double>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"totalIncTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "58bf95bd-0fee-4ae9-89f0-b683e5790a10",
+              "name": "Estimate item updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) Unique identifier of the estimate line item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"estimateId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"category\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"unitCost\": \"<double>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"totalIncTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"estimateId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"category\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"unitCost\": \"<double>\",\n  \"total\": \"<double>\",\n  \"markup\": \"<double>\",\n  \"totalIncMarkup\": \"<double>\",\n  \"totalIncTax\": \"<double>\",\n  \"taxContext\": {\n    \"taxRateId\": \"<string>\",\n    \"taxRate\": \"<double>\",\n    \"pricesIncludeTax\": \"<boolean>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2bffc68-a225-4185-8fd3-dc6fce7d3d2b",
+          "name": "Delete Estimate Item",
+          "request": {
+            "name": "Delete Estimate Item",
+            "description": {
+              "content": "Remove an estimate line item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "estimates",
+                ":estimateId",
+                "items",
+                ":itemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "estimateId",
+                  "description": "(Required) Unique identifier of the estimate."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemId",
+                  "description": "(Required) Unique identifier of the estimate line item."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3abb80ba-ba12-4e20-ad22-2c4bc3de06a9",
+              "name": "Estimate item deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "estimates",
+                    ":estimateId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "estimateId",
+                      "description": "(Required) Unique identifier of the estimate."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) Unique identifier of the estimate line item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "972eb915-d27e-4439-970f-7a2458265076",
+      "name": "Tax Context",
+      "description": {
+        "content": "Tax rates and inclusivity rules applied to estimate totals.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5f6a9fb9-3c0e-4c0c-8119-c94dd4cc66ca",
+          "name": "List Tax Rates",
+          "request": {
+            "name": "List Tax Rates",
+            "description": {
+              "content": "Return the tax rates available to the authenticated tenant, used to interpret tax-inclusive and tax-exclusive totals on estimates and estimate items.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tax-rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e02fac02-dbc4-4f1c-8d7f-088ab75ff64e",
+              "name": "Tax rate collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax-rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"rate\": 949.0288153525228,\n    \"isDefault\": false\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"rate\": 3405.1714549077096,\n    \"isDefault\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.buildxact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Ocp-Apim-Subscription-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "de6d08cc-f867-4243-b0c5-dd853cca4826",
+    "name": "Buildxact Public API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Buildxact's public REST API for residential construction estimating and job management. The API is fronted by Azure API Management and requires both an Ocp-Apim-Subscription-Key (identifying the partner / customer organization) and an Authorization: Bearer access token (identifying the specific user and tenant). Endpoints follow REST conventions with OData query support: $filter (operators include eq, gt, lt, contains, in), $orderBy with asc/desc, $top, $skip, and $count=true (record total returned in the x-odata-total-count response header). A short-lived access token is obtained via the accounts/auth/login endpoint and may be refreshed via accounts/auth/refresh-token. Rate-limited at 100 requests per 30-second window. A separate UAT/staging environment is available at developer-uat.buildxact.com for integration testing.\n\nContact Support:\n Name: Buildxact API Support",
+      "type": "text/plain"
+    }
+  }
+}
