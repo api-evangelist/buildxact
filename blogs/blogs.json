@@ -2,11 +2,18 @@
   "repo": "buildxact",
   "feeds": [
     {
-      "source": "https://www.buildxact.com/us/blog/",
+      "source": "https://www.buildxact.com/us/feed/",
       "feed_url": "https://www.buildxact.com/us/feed/",
       "title": "",
+      "saved": 3,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.buildxact.com/au/feed/",
+      "feed_url": "https://www.buildxact.com/au/feed/",
+      "title": "",
       "saved": 0,
-      "method": "discovered"
+      "method": "feed"
     },
     {
       "source": "https://www.buildxact.com/au/company/",
@@ -16,6 +23,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 3,
+  "fetched": "2026-06-27T12:03:07Z"
 }

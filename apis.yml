@@ -69,7 +69,7 @@ apis:
         url: https://developer.buildxact.com/estimate-data
       - type: Authentication
         url: https://developer.buildxact.com/authorization
-      - type: SignUp
+      - type: Signup
         url: https://developer.buildxact.com/signup
       - type: Plans
         url: https://developer.buildxact.com/plans
