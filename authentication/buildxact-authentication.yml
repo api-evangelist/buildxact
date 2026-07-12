@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/buildxact-public-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: SubscriptionKey
+  type: apiKey
+  in: header
+  parameter: Ocp-Apim-Subscription-Key
+  description: Azure API Management subscription key issued to a partner organization.
+  sources:
+  - openapi/buildxact-public-api-openapi.yml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: Short-lived bearer token obtained from /accounts/auth/login.
+  sources:
+  - openapi/buildxact-public-api-openapi.yml

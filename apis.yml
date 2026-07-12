@@ -110,6 +110,12 @@ apis:
       - type: AsyncAPI
         url: asyncapi/buildxact-webhooks-asyncapi.yml
 common:
+  - type: VulnerabilityDisclosure
+    url: security/buildxact-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/buildxact-domain-security.yml
+  - type: Authentication
+    url: authentication/buildxact-authentication.yml
   - type: Website
     url: https://www.buildxact.com
   - type: AustraliaSite
