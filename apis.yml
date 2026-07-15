@@ -110,6 +110,8 @@ apis:
       - type: AsyncAPI
         url: asyncapi/buildxact-webhooks-asyncapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/buildxact-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/buildxact-vulnerability-disclosure.yml
   - type: DomainSecurity
