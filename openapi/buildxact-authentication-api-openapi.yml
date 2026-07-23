@@ -1,0 +1,149 @@
+openapi: 3.0.3
+info:
+  title: Buildxact Public Authentication API
+  version: v3
+  description: 'Buildxact''s public REST API for residential construction estimating and job management. The API is fronted by Azure API Management and requires both an Ocp-Apim-Subscription-Key (identifying the partner / customer organization) and an Authorization: Bearer access token (identifying the specific user and tenant). Endpoints follow REST conventions with OData query support: $filter (operators include eq, gt, lt, contains, in), $orderBy with asc/desc, $top, $skip, and $count=true (record total returned in the x-odata-total-count response header). A short-lived access token is obtained via the accounts/auth/login endpoint and may be refreshed via accounts/auth/refresh-token. Rate-limited at 100 requests per 30-second window. A separate UAT/staging environment is available at developer-uat.buildxact.com for integration testing.'
+  contact:
+    name: Buildxact API Support
+    url: https://developer.buildxact.com/getting-started
+  termsOfService: https://www.buildxact.com/au/terms-of-use/
+  license:
+    name: Buildxact API Terms
+    url: https://www.buildxact.com/au/terms-of-use/
+servers:
+- url: https://api.buildxact.com
+  description: Production
+- url: https://api-v3.buildxact.com
+  description: Production (v3 host used for the accounts/auth endpoints)
+- url: https://developer-uat.buildxact.com
+  description: UAT / Staging
+security:
+- SubscriptionKey: []
+  BearerAuth: []
+tags:
+- name: Authentication
+  description: First-party login and bearer token refresh.
+paths:
+  /accounts/auth/login:
+    post:
+      tags:
+      - Authentication
+      summary: Login and Obtain Bearer Token
+      description: Exchange a Buildxact user email and plaintext API key for a short-lived bearer token plus refresh token. The subscription key header is still required to route the request through API Management.
+      operationId: login
+      security:
+      - SubscriptionKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authentication succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /accounts/auth/refresh-token:
+    post:
+      tags:
+      - Authentication
+      summary: Refresh Bearer Token
+      description: Exchange a refresh token for a new short-lived access token without re-prompting the user for credentials.
+      operationId: refreshToken
+      security:
+      - SubscriptionKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: New access token issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    RefreshTokenRequest:
+      type: object
+      required:
+      - refreshToken
+      properties:
+        refreshToken:
+          type: string
+          description: Refresh token previously returned by /accounts/auth/login.
+    LoginRequest:
+      type: object
+      required:
+      - email
+      - apiKey
+      properties:
+        email:
+          type: string
+          format: email
+          description: Buildxact user email address.
+        apiKey:
+          type: string
+          description: Plaintext API key issued to the Buildxact user.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
+    TokenResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: Short-lived bearer token to use in the Authorization header.
+        refreshToken:
+          type: string
+          description: Token used to mint a new access token without re-authenticating.
+        expiresIn:
+          type: integer
+          description: Lifetime of the access token, in seconds.
+        tokenType:
+          type: string
+          example: Bearer
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded (100 requests per 30-second window).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    SubscriptionKey:
+      type: apiKey
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: Azure API Management subscription key issued to a partner organization.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Short-lived bearer token obtained from /accounts/auth/login.

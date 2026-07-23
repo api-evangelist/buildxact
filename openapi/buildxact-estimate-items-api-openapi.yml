@@ -1,0 +1,246 @@
+openapi: 3.0.3
+info:
+  title: Buildxact Public Authentication Estimate Items API
+  version: v3
+  description: 'Buildxact''s public REST API for residential construction estimating and job management. The API is fronted by Azure API Management and requires both an Ocp-Apim-Subscription-Key (identifying the partner / customer organization) and an Authorization: Bearer access token (identifying the specific user and tenant). Endpoints follow REST conventions with OData query support: $filter (operators include eq, gt, lt, contains, in), $orderBy with asc/desc, $top, $skip, and $count=true (record total returned in the x-odata-total-count response header). A short-lived access token is obtained via the accounts/auth/login endpoint and may be refreshed via accounts/auth/refresh-token. Rate-limited at 100 requests per 30-second window. A separate UAT/staging environment is available at developer-uat.buildxact.com for integration testing.'
+  contact:
+    name: Buildxact API Support
+    url: https://developer.buildxact.com/getting-started
+  termsOfService: https://www.buildxact.com/au/terms-of-use/
+  license:
+    name: Buildxact API Terms
+    url: https://www.buildxact.com/au/terms-of-use/
+servers:
+- url: https://api.buildxact.com
+  description: Production
+- url: https://api-v3.buildxact.com
+  description: Production (v3 host used for the accounts/auth endpoints)
+- url: https://developer-uat.buildxact.com
+  description: UAT / Staging
+security:
+- SubscriptionKey: []
+  BearerAuth: []
+tags:
+- name: Estimate Items
+  description: Line items inside an estimate (materials, labor, assemblies).
+paths:
+  /estimates/{estimateId}/items:
+    parameters:
+    - $ref: '#/components/parameters/EstimateId'
+    get:
+      tags:
+      - Estimate Items
+      summary: List Estimate Items
+      description: Return the line items belonging to an estimate. Supports OData $filter, $orderBy, $top, $skip, and $count.
+      operationId: listEstimateItems
+      parameters:
+      - $ref: '#/components/parameters/ODataFilter'
+      - $ref: '#/components/parameters/ODataOrderBy'
+      - $ref: '#/components/parameters/ODataTop'
+      - $ref: '#/components/parameters/ODataSkip'
+      - $ref: '#/components/parameters/ODataCount'
+      responses:
+        '200':
+          description: Estimate item collection.
+          headers:
+            x-odata-total-count:
+              description: Total item count when $count=true is supplied.
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EstimateItem'
+    post:
+      tags:
+      - Estimate Items
+      summary: Add Estimate Item
+      description: Add a new line item to an estimate.
+      operationId: addEstimateItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateItem'
+      responses:
+        '201':
+          description: Estimate item created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstimateItem'
+  /estimates/{estimateId}/items/{itemId}:
+    parameters:
+    - $ref: '#/components/parameters/EstimateId'
+    - $ref: '#/components/parameters/ItemId'
+    get:
+      tags:
+      - Estimate Items
+      summary: Get Estimate Item
+      description: Return a single estimate line item.
+      operationId: getEstimateItem
+      responses:
+        '200':
+          description: Estimate item found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstimateItem'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      tags:
+      - Estimate Items
+      summary: Update Estimate Item
+      description: Partially update an estimate line item.
+      operationId: updateEstimateItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateItem'
+      responses:
+        '200':
+          description: Estimate item updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstimateItem'
+    delete:
+      tags:
+      - Estimate Items
+      summary: Delete Estimate Item
+      description: Remove an estimate line item.
+      operationId: deleteEstimateItem
+      responses:
+        '204':
+          description: Estimate item deleted.
+components:
+  parameters:
+    ODataTop:
+      name: $top
+      in: query
+      description: Page size — maximum records to return.
+      schema:
+        type: integer
+        minimum: 1
+    ODataCount:
+      name: $count
+      in: query
+      description: When true, include the total record count in the x-odata-total-count response header.
+      schema:
+        type: boolean
+    ODataFilter:
+      name: $filter
+      in: query
+      description: OData filter expression (operators include eq, gt, lt, contains, in).
+      schema:
+        type: string
+    ODataSkip:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination.
+      schema:
+        type: integer
+        minimum: 0
+    ItemId:
+      name: itemId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier of the estimate line item.
+    ODataOrderBy:
+      name: $orderBy
+      in: query
+      description: OData orderBy expression (e.g. fieldName asc, fieldName desc).
+      schema:
+        type: string
+    EstimateId:
+      name: estimateId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier of the estimate.
+  schemas:
+    EstimateItem:
+      type: object
+      description: A line item on an estimate — material, labor, subcontractor, or assembly.
+      properties:
+        id:
+          type: string
+        estimateId:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+          description: Cost category (e.g. Materials, Labor, Subcontractor).
+        unit:
+          type: string
+          description: Unit of measure (e.g. each, hour, m2, lf).
+        quantity:
+          type: number
+          format: double
+        unitCost:
+          type: number
+          format: double
+        total:
+          type: number
+          format: double
+        markup:
+          type: number
+          format: double
+        totalIncMarkup:
+          type: number
+          format: double
+        totalIncTax:
+          type: number
+          format: double
+        taxContext:
+          $ref: '#/components/schemas/TaxContext'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
+    TaxContext:
+      type: object
+      description: Tax inclusivity context — describes whether stored monetary values on an estimate or item already include tax and which tax rate applies.
+      properties:
+        taxRateId:
+          type: string
+        taxRate:
+          type: number
+          format: double
+        pricesIncludeTax:
+          type: boolean
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    SubscriptionKey:
+      type: apiKey
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: Azure API Management subscription key issued to a partner organization.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Short-lived bearer token obtained from /accounts/auth/login.

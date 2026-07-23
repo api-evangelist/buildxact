@@ -1,0 +1,282 @@
+openapi: 3.0.3
+info:
+  title: Buildxact Public Authentication Estimates API
+  version: v3
+  description: 'Buildxact''s public REST API for residential construction estimating and job management. The API is fronted by Azure API Management and requires both an Ocp-Apim-Subscription-Key (identifying the partner / customer organization) and an Authorization: Bearer access token (identifying the specific user and tenant). Endpoints follow REST conventions with OData query support: $filter (operators include eq, gt, lt, contains, in), $orderBy with asc/desc, $top, $skip, and $count=true (record total returned in the x-odata-total-count response header). A short-lived access token is obtained via the accounts/auth/login endpoint and may be refreshed via accounts/auth/refresh-token. Rate-limited at 100 requests per 30-second window. A separate UAT/staging environment is available at developer-uat.buildxact.com for integration testing.'
+  contact:
+    name: Buildxact API Support
+    url: https://developer.buildxact.com/getting-started
+  termsOfService: https://www.buildxact.com/au/terms-of-use/
+  license:
+    name: Buildxact API Terms
+    url: https://www.buildxact.com/au/terms-of-use/
+servers:
+- url: https://api.buildxact.com
+  description: Production
+- url: https://api-v3.buildxact.com
+  description: Production (v3 host used for the accounts/auth endpoints)
+- url: https://developer-uat.buildxact.com
+  description: UAT / Staging
+security:
+- SubscriptionKey: []
+  BearerAuth: []
+tags:
+- name: Estimates
+  description: Construction estimates — the top-level pricing document for a job.
+paths:
+  /estimates:
+    get:
+      tags:
+      - Estimates
+      summary: List Estimates
+      description: Return a paginated list of estimates for the authenticated tenant. Supports OData $filter, $orderBy, $top, $skip, and $count.
+      operationId: listEstimates
+      parameters:
+      - $ref: '#/components/parameters/ODataFilter'
+      - $ref: '#/components/parameters/ODataOrderBy'
+      - $ref: '#/components/parameters/ODataTop'
+      - $ref: '#/components/parameters/ODataSkip'
+      - $ref: '#/components/parameters/ODataCount'
+      responses:
+        '200':
+          description: Estimate collection.
+          headers:
+            x-odata-total-count:
+              description: Total estimate count when $count=true is supplied.
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Estimate'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+    post:
+      tags:
+      - Estimates
+      summary: Create Estimate
+      description: Create a new construction estimate for the authenticated tenant.
+      operationId: createEstimate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Estimate'
+      responses:
+        '201':
+          description: Estimate created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Estimate'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /estimates/{estimateId}:
+    parameters:
+    - $ref: '#/components/parameters/EstimateId'
+    get:
+      tags:
+      - Estimates
+      summary: Get Estimate
+      description: Return a single estimate by its identifier, including totals and tax context.
+      operationId: getEstimate
+      responses:
+        '200':
+          description: Estimate found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Estimate'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      tags:
+      - Estimates
+      summary: Update Estimate
+      description: Partially update fields on an existing estimate.
+      operationId: updateEstimate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Estimate'
+      responses:
+        '200':
+          description: Estimate updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Estimate'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+      - Estimates
+      summary: Delete Estimate
+      description: Delete an estimate by identifier.
+      operationId: deleteEstimate
+      responses:
+        '204':
+          description: Estimate deleted.
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    EstimateId:
+      name: estimateId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier of the estimate.
+    ODataTop:
+      name: $top
+      in: query
+      description: Page size — maximum records to return.
+      schema:
+        type: integer
+        minimum: 1
+    ODataCount:
+      name: $count
+      in: query
+      description: When true, include the total record count in the x-odata-total-count response header.
+      schema:
+        type: boolean
+    ODataFilter:
+      name: $filter
+      in: query
+      description: OData filter expression (operators include eq, gt, lt, contains, in).
+      schema:
+        type: string
+    ODataSkip:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination.
+      schema:
+        type: integer
+        minimum: 0
+    ODataOrderBy:
+      name: $orderBy
+      in: query
+      description: OData orderBy expression (e.g. fieldName asc, fieldName desc).
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded (100 requests per 30-second window).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Estimate:
+      type: object
+      description: A construction estimate — the priced document a builder issues to a client capturing scope, line items, markup, and tax.
+      properties:
+        id:
+          type: string
+          description: Estimate identifier.
+        name:
+          type: string
+          description: Human-readable estimate name.
+        jobId:
+          type: string
+          description: Identifier of the parent job, if any.
+        customerId:
+          type: string
+          description: Identifier of the customer this estimate is for.
+        status:
+          type: string
+          description: Estimate status (e.g. Draft, Sent, Accepted, Declined).
+        currency:
+          type: string
+          description: ISO 4217 currency code applied to monetary fields.
+        total:
+          type: number
+          format: double
+          description: Subtotal of all items before markup and tax.
+        markup:
+          type: number
+          format: double
+          description: Markup amount applied on top of the subtotal.
+        totalIncMarkup:
+          type: number
+          format: double
+          description: Subtotal plus markup, exclusive of tax.
+        taxIncMarkup:
+          type: number
+          format: double
+          description: Tax amount calculated on the markup-inclusive total.
+        totalIncMarkupTax:
+          type: number
+          format: double
+          description: Grand total including markup and tax.
+        taxContext:
+          $ref: '#/components/schemas/TaxContext'
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
+    TaxContext:
+      type: object
+      description: Tax inclusivity context — describes whether stored monetary values on an estimate or item already include tax and which tax rate applies.
+      properties:
+        taxRateId:
+          type: string
+        taxRate:
+          type: number
+          format: double
+        pricesIncludeTax:
+          type: boolean
+  securitySchemes:
+    SubscriptionKey:
+      type: apiKey
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: Azure API Management subscription key issued to a partner organization.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Short-lived bearer token obtained from /accounts/auth/login.

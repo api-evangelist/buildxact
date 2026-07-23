@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: Buildxact Public Authentication Tax Context API
+  version: v3
+  description: 'Buildxact''s public REST API for residential construction estimating and job management. The API is fronted by Azure API Management and requires both an Ocp-Apim-Subscription-Key (identifying the partner / customer organization) and an Authorization: Bearer access token (identifying the specific user and tenant). Endpoints follow REST conventions with OData query support: $filter (operators include eq, gt, lt, contains, in), $orderBy with asc/desc, $top, $skip, and $count=true (record total returned in the x-odata-total-count response header). A short-lived access token is obtained via the accounts/auth/login endpoint and may be refreshed via accounts/auth/refresh-token. Rate-limited at 100 requests per 30-second window. A separate UAT/staging environment is available at developer-uat.buildxact.com for integration testing.'
+  contact:
+    name: Buildxact API Support
+    url: https://developer.buildxact.com/getting-started
+  termsOfService: https://www.buildxact.com/au/terms-of-use/
+  license:
+    name: Buildxact API Terms
+    url: https://www.buildxact.com/au/terms-of-use/
+servers:
+- url: https://api.buildxact.com
+  description: Production
+- url: https://api-v3.buildxact.com
+  description: Production (v3 host used for the accounts/auth endpoints)
+- url: https://developer-uat.buildxact.com
+  description: UAT / Staging
+security:
+- SubscriptionKey: []
+  BearerAuth: []
+tags:
+- name: Tax Context
+  description: Tax rates and inclusivity rules applied to estimate totals.
+paths:
+  /tax-rates:
+    get:
+      tags:
+      - Tax Context
+      summary: List Tax Rates
+      description: Return the tax rates available to the authenticated tenant, used to interpret tax-inclusive and tax-exclusive totals on estimates and estimate items.
+      operationId: listTaxRates
+      responses:
+        '200':
+          description: Tax rate collection.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaxRate'
+components:
+  schemas:
+    TaxRate:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        rate:
+          type: number
+          format: double
+          description: Tax rate as a decimal (e.g. 0.10 for 10%).
+        isDefault:
+          type: boolean
+  securitySchemes:
+    SubscriptionKey:
+      type: apiKey
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: Azure API Management subscription key issued to a partner organization.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Short-lived bearer token obtained from /accounts/auth/login.
