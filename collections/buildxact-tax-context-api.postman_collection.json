@@ -1,0 +1,127 @@
+{
+  "item": [
+    {
+      "id": "6ac2b24d-449c-4fc1-8811-0ad160d05bf1",
+      "name": "Tax Context",
+      "description": {
+        "content": "Tax rates and inclusivity rules applied to estimate totals.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1a87dacc-bd4e-4b4f-bd39-62dd19455704",
+          "name": "List Tax Rates",
+          "request": {
+            "name": "List Tax Rates",
+            "description": {
+              "content": "Return the tax rates available to the authenticated tenant, used to interpret tax-inclusive and tax-exclusive totals on estimates and estimate items.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tax-rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d20e14b-67e1-455a-be15-0180f83814fd",
+              "name": "Tax rate collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax-rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"rate\": 4409.777023286701,\n    \"isDefault\": false\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"rate\": 772.540298152663,\n    \"isDefault\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.buildxact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Ocp-Apim-Subscription-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f0f05999-b080-48e2-bbdf-829ff51c7127",
+    "name": "Buildxact Public Authentication Tax Context API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Buildxact's public REST API for residential construction estimating and job management. The API is fronted by Azure API Management and requires both an Ocp-Apim-Subscription-Key (identifying the partner / customer organization) and an Authorization: Bearer access token (identifying the specific user and tenant). Endpoints follow REST conventions with OData query support: $filter (operators include eq, gt, lt, contains, in), $orderBy with asc/desc, $top, $skip, and $count=true (record total returned in the x-odata-total-count response header). A short-lived access token is obtained via the accounts/auth/login endpoint and may be refreshed via accounts/auth/refresh-token. Rate-limited at 100 requests per 30-second window. A separate UAT/staging environment is available at developer-uat.buildxact.com for integration testing.\n\nContact Support:\n Name: Buildxact API Support",
+      "type": "text/plain"
+    }
+  }
+}

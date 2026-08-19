@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buildxact Public Authentication Estimate Items API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Ocp-Apim-Subscription-Key",
+      "value": "{{Ocp-Apim-Subscription-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Estimate Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Estimate Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.buildxact.com/estimates/:estimateId/items",
+            "params": [
+              {
+                "name": "estimateId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the estimate."
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression (operators include eq, gt, lt, contains, in)."
+              },
+              {
+                "name": "$orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OData orderBy expression (e.g. fieldName asc, fieldName desc)."
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Page size — maximum records to return."
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination."
+              },
+              {
+                "name": "$count",
+                "value": "",
+                "type": "query",
+                "description": "When true, include the total record count in the x-odata-total-count response header."
+              }
+            ]
+          },
+          "docs": "Return the line items belonging to an estimate. Supports OData $filter, $orderBy, $top, $skip, and $count."
+        },
+        {
+          "info": {
+            "name": "Add Estimate Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.buildxact.com/estimates/:estimateId/items",
+            "params": [
+              {
+                "name": "estimateId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the estimate."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new line item to an estimate."
+        },
+        {
+          "info": {
+            "name": "Get Estimate Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.buildxact.com/estimates/:estimateId/items/:itemId",
+            "params": [
+              {
+                "name": "estimateId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the estimate."
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the estimate line item."
+              }
+            ]
+          },
+          "docs": "Return a single estimate line item."
+        },
+        {
+          "info": {
+            "name": "Update Estimate Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.buildxact.com/estimates/:estimateId/items/:itemId",
+            "params": [
+              {
+                "name": "estimateId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the estimate."
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the estimate line item."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update an estimate line item."
+        },
+        {
+          "info": {
+            "name": "Delete Estimate Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.buildxact.com/estimates/:estimateId/items/:itemId",
+            "params": [
+              {
+                "name": "estimateId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the estimate."
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the estimate line item."
+              }
+            ]
+          },
+          "docs": "Remove an estimate line item."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

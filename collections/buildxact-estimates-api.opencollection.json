@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buildxact Public Authentication Estimates API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Ocp-Apim-Subscription-Key",
+      "value": "{{Ocp-Apim-Subscription-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Estimates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Estimates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.buildxact.com/estimates",
+            "params": [
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression (operators include eq, gt, lt, contains, in)."
+              },
+              {
+                "name": "$orderBy",
+                "value": "",
+                "type": "query",
+                "description": "OData orderBy expression (e.g. fieldName asc, fieldName desc)."
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Page size — maximum records to return."
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination."
+              },
+              {
+                "name": "$count",
+                "value": "",
+                "type": "query",
+                "description": "When true, include the total record count in the x-odata-total-count response header."
+              }
+            ]
+          },
+          "docs": "Return a paginated list of estimates for the authenticated tenant. Supports OData $filter, $orderBy, $top, $skip, and $count."
+        },
+        {
+          "info": {
+            "name": "Create Estimate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.buildxact.com/estimates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new construction estimate for the authenticated tenant."
+        },
+        {
+          "info": {
+            "name": "Get Estimate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.buildxact.com/estimates/:estimateId",
+            "params": [
+              {
+                "name": "estimateId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the estimate."
+              }
+            ]
+          },
+          "docs": "Return a single estimate by its identifier, including totals and tax context."
+        },
+        {
+          "info": {
+            "name": "Update Estimate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.buildxact.com/estimates/:estimateId",
+            "params": [
+              {
+                "name": "estimateId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the estimate."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update fields on an existing estimate."
+        },
+        {
+          "info": {
+            "name": "Delete Estimate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.buildxact.com/estimates/:estimateId",
+            "params": [
+              {
+                "name": "estimateId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the estimate."
+              }
+            ]
+          },
+          "docs": "Delete an estimate by identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

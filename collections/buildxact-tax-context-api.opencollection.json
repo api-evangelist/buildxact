@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buildxact Public Authentication Tax Context API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Ocp-Apim-Subscription-Key",
+      "value": "{{Ocp-Apim-Subscription-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tax Context",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tax Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.buildxact.com/tax-rates"
+          },
+          "docs": "Return the tax rates available to the authenticated tenant, used to interpret tax-inclusive and tax-exclusive totals on estimates and estimate items."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

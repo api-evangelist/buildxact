@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buildxact Public Authentication API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Ocp-Apim-Subscription-Key",
+      "value": "{{Ocp-Apim-Subscription-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login and Obtain Bearer Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.buildxact.com/accounts/auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Exchange a Buildxact user email and plaintext API key for a short-lived bearer token plus refresh token. The subscription key header is still required to route the request through API Management."
+        },
+        {
+          "info": {
+            "name": "Refresh Bearer Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.buildxact.com/accounts/auth/refresh-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Exchange a refresh token for a new short-lived access token without re-prompting the user for credentials."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
