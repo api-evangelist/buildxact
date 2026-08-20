@@ -46,6 +46,26 @@ tags:
   - Builders
   - Remodelers
   - Trades
+  - Software-as-a-Service
+  - Australia
+  - Autodesk
+tags_raw:
+  - Construction
+  - Residential Construction
+  - Construction Management
+  - Estimating
+  - Takeoffs
+  - Job Management
+  - Project Management
+  - Quoting
+  - Scheduling
+  - Purchase Orders
+  - Invoicing
+  - Supplier Integration
+  - Material Pricing
+  - Builders
+  - Remodelers
+  - Trades
   - SaaS
   - Australia
   - Autodesk
@@ -66,6 +86,12 @@ apis:
   humanURL: https://developer.buildxact.com/webhooks
   version: v1
   tags:
+  - Webhook
+  - Event
+  - Estimates
+  - Leads
+  - Event-Driven
+  tags_raw:
   - Webhooks
   - Events
   - Estimates
