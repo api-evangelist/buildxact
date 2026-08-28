@@ -13,6 +13,18 @@ description: >-
   separate UAT/staging environment. In 2024, Autodesk announced an agreement to acquire Buildxact, positioning the
   product as a residential construction front-end alongside Autodesk's broader AEC portfolio.
 type: Provider
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
