@@ -1,0 +1,36 @@
+slug: buildxact
+provider: Buildxact
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Infrastructure
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Estimates
+  spec_file: buildxact-estimates-api-openapi.yml
+  capability_id: BC-5020.20
+  capability_id_l1: BC-5020
+  capability_name: Cost Estimating & Management
+  confidence: 0.76
+  evidence: 'POST /estimates — "Create Estimate"; "List Estimates"; vendor: "construction estimating and
+    project management SaaS"'
+  reason: Creation and lifecycle of construction cost estimates maps to project cost estimating and control.
+    Residual ambiguity with quoting/CPQ keeps confidence moderate.
+- tag: Estimate Items
+  spec_file: buildxact-estimate-items-api-openapi.yml
+  capability_id: BC-5020.20
+  capability_id_l1: BC-5020
+  capability_name: Cost Estimating & Management
+  confidence: 0.74
+  evidence: 'GET /estimates/{estimateId}/items — "List Estimate Items"; "Add Estimate Item"; vendor: "construction
+    estimating and project management SaaS for residential builders"'
+  reason: Line-item build-up of construction cost estimates is cost estimating for a construction project.
+    Mapped to Cost Estimating & Management; some ambiguity because residential estimates also feed customer
+    quoting (BC-410.40).

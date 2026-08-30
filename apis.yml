@@ -255,6 +255,9 @@ apis:
   - type: RateLimits
     url: rate-limits/buildxact-rate-limits.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/buildxact-capability-edges.yml
+    name: Buildxact Business Capability Map
   - type: AgenticAccess
     url: agentic-access/buildxact-agentic-access.yml
   - type: VulnerabilityDisclosure
