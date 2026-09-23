@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Buildxact Public Authentication Tax Context API
+  title: Buildxact Public Tax Context API
   version: v3
-  description: 'Buildxact''s public REST API for residential construction estimating and job management. The API is fronted by Azure API Management and requires both an Ocp-Apim-Subscription-Key (identifying the partner / customer organization) and an Authorization: Bearer access token (identifying the specific user and tenant). Endpoints follow REST conventions with OData query support: $filter (operators include eq, gt, lt, contains, in), $orderBy with asc/desc, $top, $skip, and $count=true (record total returned in the x-odata-total-count response header). A short-lived access token is obtained via the accounts/auth/login endpoint and may be refreshed via accounts/auth/refresh-token. Rate-limited at 100 requests per 30-second window. A separate UAT/staging environment is available at developer-uat.buildxact.com for integration testing.'
+  description: Buildxact's public REST API for residential construction estimating and job management.
   contact:
     name: Buildxact API Support
     url: https://developer.buildxact.com/getting-started

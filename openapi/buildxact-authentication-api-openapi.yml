@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Buildxact Public Authentication API
   version: v3
-  description: 'Buildxact''s public REST API for residential construction estimating and job management. The API is fronted by Azure API Management and requires both an Ocp-Apim-Subscription-Key (identifying the partner / customer organization) and an Authorization: Bearer access token (identifying the specific user and tenant). Endpoints follow REST conventions with OData query support: $filter (operators include eq, gt, lt, contains, in), $orderBy with asc/desc, $top, $skip, and $count=true (record total returned in the x-odata-total-count response header). A short-lived access token is obtained via the accounts/auth/login endpoint and may be refreshed via accounts/auth/refresh-token. Rate-limited at 100 requests per 30-second window. A separate UAT/staging environment is available at developer-uat.buildxact.com for integration testing.'
+  description: Buildxact's public REST API for residential construction estimating and job management.
   contact:
     name: Buildxact API Support
     url: https://developer.buildxact.com/getting-started
@@ -76,38 +76,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    RefreshTokenRequest:
-      type: object
-      required:
-      - refreshToken
-      properties:
-        refreshToken:
-          type: string
-          description: Refresh token previously returned by /accounts/auth/login.
-    LoginRequest:
-      type: object
-      required:
-      - email
-      - apiKey
-      properties:
-        email:
-          type: string
-          format: email
-          description: Buildxact user email address.
-        apiKey:
-          type: string
-          description: Plaintext API key issued to the Buildxact user.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            type: object
     TokenResponse:
       type: object
       properties:
@@ -123,15 +91,47 @@ components:
         tokenType:
           type: string
           example: Bearer
+    RefreshTokenRequest:
+      type: object
+      required:
+      - refreshToken
+      properties:
+        refreshToken:
+          type: string
+          description: Refresh token previously returned by /accounts/auth/login.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
+    LoginRequest:
+      type: object
+      required:
+      - email
+      - apiKey
+      properties:
+        email:
+          type: string
+          format: email
+          description: Buildxact user email address.
+        apiKey:
+          type: string
+          description: Plaintext API key issued to the Buildxact user.
   responses:
-    Unauthorized:
-      description: Missing or invalid credentials.
+    TooManyRequests:
+      description: Rate limit exceeded (100 requests per 30-second window).
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Rate limit exceeded (100 requests per 30-second window).
+    Unauthorized:
+      description: Missing or invalid credentials.
       content:
         application/json:
           schema:
