@@ -121,26 +121,12 @@ paths:
           description: Estimate item deleted.
 components:
   parameters:
-    ODataTop:
-      name: $top
+    ODataFilter:
+      name: $filter
       in: query
-      description: Page size — maximum records to return.
-      schema:
-        type: integer
-        minimum: 1
-    ODataOrderBy:
-      name: $orderBy
-      in: query
-      description: OData orderBy expression (e.g. fieldName asc, fieldName desc).
+      description: OData filter expression (operators include eq, gt, lt, contains, in).
       schema:
         type: string
-    ItemId:
-      name: itemId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Unique identifier of the estimate line item.
     EstimateId:
       name: estimateId
       in: path
@@ -148,16 +134,24 @@ components:
       schema:
         type: string
       description: Unique identifier of the estimate.
-    ODataCount:
-      name: $count
+    ODataTop:
+      name: $top
       in: query
-      description: When true, include the total record count in the x-odata-total-count response header.
+      description: Page size — maximum records to return.
       schema:
-        type: boolean
-    ODataFilter:
-      name: $filter
+        type: integer
+        minimum: 1
+    ItemId:
+      name: itemId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier of the estimate line item.
+    ODataOrderBy:
+      name: $orderBy
       in: query
-      description: OData filter expression (operators include eq, gt, lt, contains, in).
+      description: OData orderBy expression (e.g. fieldName asc, fieldName desc).
       schema:
         type: string
     ODataSkip:
@@ -167,14 +161,24 @@ components:
       schema:
         type: integer
         minimum: 0
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    ODataCount:
+      name: $count
+      in: query
+      description: When true, include the total record count in the x-odata-total-count response header.
+      schema:
+        type: boolean
   schemas:
+    TaxContext:
+      type: object
+      description: Tax inclusivity context — describes whether stored monetary values on an estimate or item already include tax and which tax rate applies.
+      properties:
+        taxRateId:
+          type: string
+        taxRate:
+          type: number
+          format: double
+        pricesIncludeTax:
+          type: boolean
     EstimateItem:
       type: object
       description: A line item on an estimate — material, labor, subcontractor, or assembly.
@@ -222,17 +226,13 @@ components:
           type: array
           items:
             type: object
-    TaxContext:
-      type: object
-      description: Tax inclusivity context — describes whether stored monetary values on an estimate or item already include tax and which tax rate applies.
-      properties:
-        taxRateId:
-          type: string
-        taxRate:
-          type: number
-          format: double
-        pricesIncludeTax:
-          type: boolean
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     SubscriptionKey:
       type: apiKey

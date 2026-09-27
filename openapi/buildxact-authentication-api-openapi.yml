@@ -76,6 +76,30 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    LoginRequest:
+      type: object
+      required:
+      - email
+      - apiKey
+      properties:
+        email:
+          type: string
+          format: email
+          description: Buildxact user email address.
+        apiKey:
+          type: string
+          description: Plaintext API key issued to the Buildxact user.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
     TokenResponse:
       type: object
       properties:
@@ -99,39 +123,15 @@ components:
         refreshToken:
           type: string
           description: Refresh token previously returned by /accounts/auth/login.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            type: object
-    LoginRequest:
-      type: object
-      required:
-      - email
-      - apiKey
-      properties:
-        email:
-          type: string
-          format: email
-          description: Buildxact user email address.
-        apiKey:
-          type: string
-          description: Plaintext API key issued to the Buildxact user.
   responses:
-    TooManyRequests:
-      description: Rate limit exceeded (100 requests per 30-second window).
+    Unauthorized:
+      description: Missing or invalid credentials.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid credentials.
+    TooManyRequests:
+      description: Rate limit exceeded (100 requests per 30-second window).
       content:
         application/json:
           schema:
