@@ -121,12 +121,6 @@ paths:
           description: Estimate item deleted.
 components:
   parameters:
-    ODataFilter:
-      name: $filter
-      in: query
-      description: OData filter expression (operators include eq, gt, lt, contains, in).
-      schema:
-        type: string
     EstimateId:
       name: estimateId
       in: path
@@ -141,6 +135,18 @@ components:
       schema:
         type: integer
         minimum: 1
+    ODataOrderBy:
+      name: $orderBy
+      in: query
+      description: OData orderBy expression (e.g. fieldName asc, fieldName desc).
+      schema:
+        type: string
+    ODataFilter:
+      name: $filter
+      in: query
+      description: OData filter expression (operators include eq, gt, lt, contains, in).
+      schema:
+        type: string
     ItemId:
       name: itemId
       in: path
@@ -148,12 +154,6 @@ components:
       schema:
         type: string
       description: Unique identifier of the estimate line item.
-    ODataOrderBy:
-      name: $orderBy
-      in: query
-      description: OData orderBy expression (e.g. fieldName asc, fieldName desc).
-      schema:
-        type: string
     ODataSkip:
       name: $skip
       in: query
@@ -179,6 +179,17 @@ components:
           format: double
         pricesIncludeTax:
           type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
     EstimateItem:
       type: object
       description: A line item on an estimate — material, labor, subcontractor, or assembly.
@@ -215,17 +226,6 @@ components:
           format: double
         taxContext:
           $ref: '#/components/schemas/TaxContext'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            type: object
   responses:
     NotFound:
       description: Resource not found.

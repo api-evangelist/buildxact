@@ -132,12 +132,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    ODataFilter:
-      name: $filter
-      in: query
-      description: OData filter expression (operators include eq, gt, lt, contains, in).
-      schema:
-        type: string
     EstimateId:
       name: estimateId
       in: path
@@ -156,6 +150,12 @@ components:
       name: $orderBy
       in: query
       description: OData orderBy expression (e.g. fieldName asc, fieldName desc).
+      schema:
+        type: string
+    ODataFilter:
+      name: $filter
+      in: query
+      description: OData filter expression (operators include eq, gt, lt, contains, in).
       schema:
         type: string
     ODataSkip:
@@ -208,6 +208,17 @@ components:
           format: double
         pricesIncludeTax:
           type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
     Estimate:
       type: object
       description: A construction estimate — the priced document a builder issues to a client capturing scope, line items, markup, and tax.
@@ -258,17 +269,6 @@ components:
         modifiedAt:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            type: object
   securitySchemes:
     SubscriptionKey:
       type: apiKey
