@@ -75,41 +75,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    TooManyRequests:
-      description: Rate limit exceeded (100 requests per 30-second window).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    LoginRequest:
-      type: object
-      required:
-      - email
-      - apiKey
-      properties:
-        email:
-          type: string
-          format: email
-          description: Buildxact user email address.
-        apiKey:
-          type: string
-          description: Plaintext API key issued to the Buildxact user.
-    RefreshTokenRequest:
-      type: object
-      required:
-      - refreshToken
-      properties:
-        refreshToken:
-          type: string
-          description: Refresh token previously returned by /accounts/auth/login.
     Error:
       type: object
       properties:
@@ -136,6 +102,40 @@ components:
         tokenType:
           type: string
           example: Bearer
+    LoginRequest:
+      type: object
+      required:
+      - email
+      - apiKey
+      properties:
+        email:
+          type: string
+          format: email
+          description: Buildxact user email address.
+        apiKey:
+          type: string
+          description: Plaintext API key issued to the Buildxact user.
+    RefreshTokenRequest:
+      type: object
+      required:
+      - refreshToken
+      properties:
+        refreshToken:
+          type: string
+          description: Refresh token previously returned by /accounts/auth/login.
+  responses:
+    TooManyRequests:
+      description: Rate limit exceeded (100 requests per 30-second window).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     SubscriptionKey:
       type: apiKey
