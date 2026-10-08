@@ -256,6 +256,10 @@ apis:
   - type: RateLimits
     url: rate-limits/buildxact-rate-limits.yml
 common:
+  - type: RateLimits
+    url: rate-limits/buildxact-rate-limits.yml
+  - type: FinOps
+    url: finops/buildxact-finops.yml
   - type: CapabilityMap
     url: capabilities/buildxact-capability-edges.yml
     name: Buildxact Business Capability Map
