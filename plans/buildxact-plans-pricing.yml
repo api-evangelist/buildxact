@@ -1,3 +1,8 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (dated 2026-05-25 by the file itself), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
+generated: '2026-05-25'
 specification: API Commons Plans
 specificationVersion: '0.1'
 provider: Buildxact
@@ -144,3 +149,38 @@ notes:
   - Plans listed in USD reflect the US storefront; AU/UK/NZ/CA storefronts publish equivalent local pricing.
   - Buildxact states there are no hidden fees — upgrades, maintenance, support, and training are included.
   - Merchant and Manufacturer partner plans (suppliers of building materials) are quoted separately and unlock additional webhook events beyond the customer-facing tiers.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units: []
+  plans:
+  - name: Foundation
+    access: other
+    model: subscription
+    model_how: stated
+    units: []
+    periods:
+    - month
+  - name: Pro
+    access: other
+    model: subscription
+    model_how: stated
+    units: []
+    periods:
+    - month
+  - name: Master
+    access: other
+    model: subscription
+    model_how: stated
+    units: []
+    periods:
+    - month
+  - name: Free Trial
+    access: trial
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - term
