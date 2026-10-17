@@ -120,6 +120,13 @@ paths:
         '204':
           description: Estimate item deleted.
 components:
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -132,17 +139,6 @@ components:
           type: array
           items:
             type: object
-    TaxContext:
-      type: object
-      description: Tax inclusivity context — describes whether stored monetary values on an estimate or item already include tax and which tax rate applies.
-      properties:
-        taxRateId:
-          type: string
-        taxRate:
-          type: number
-          format: double
-        pricesIncludeTax:
-          type: boolean
     EstimateItem:
       type: object
       description: A line item on an estimate — material, labor, subcontractor, or assembly.
@@ -179,7 +175,44 @@ components:
           format: double
         taxContext:
           $ref: '#/components/schemas/TaxContext'
+    TaxContext:
+      type: object
+      description: Tax inclusivity context — describes whether stored monetary values on an estimate or item already include tax and which tax rate applies.
+      properties:
+        taxRateId:
+          type: string
+        taxRate:
+          type: number
+          format: double
+        pricesIncludeTax:
+          type: boolean
   parameters:
+    ODataTop:
+      name: $top
+      in: query
+      description: Page size — maximum records to return.
+      schema:
+        type: integer
+        minimum: 1
+    ODataOrderBy:
+      name: $orderBy
+      in: query
+      description: OData orderBy expression (e.g. fieldName asc, fieldName desc).
+      schema:
+        type: string
+    ItemId:
+      name: itemId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier of the estimate line item.
+    ODataFilter:
+      name: $filter
+      in: query
+      description: OData filter expression (operators include eq, gt, lt, contains, in).
+      schema:
+        type: string
     EstimateId:
       name: estimateId
       in: path
@@ -200,39 +233,6 @@ components:
       description: When true, include the total record count in the x-odata-total-count response header.
       schema:
         type: boolean
-    ODataOrderBy:
-      name: $orderBy
-      in: query
-      description: OData orderBy expression (e.g. fieldName asc, fieldName desc).
-      schema:
-        type: string
-    ODataFilter:
-      name: $filter
-      in: query
-      description: OData filter expression (operators include eq, gt, lt, contains, in).
-      schema:
-        type: string
-    ODataTop:
-      name: $top
-      in: query
-      description: Page size — maximum records to return.
-      schema:
-        type: integer
-        minimum: 1
-    ItemId:
-      name: itemId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Unique identifier of the estimate line item.
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     SubscriptionKey:
       type: apiKey

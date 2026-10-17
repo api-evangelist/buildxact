@@ -205,18 +205,6 @@ components:
           type: string
           format: date-time
   responses:
-    BadRequest:
-      description: Malformed request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Rate limit exceeded (100 requests per 30-second window).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: Resource not found.
       content:
@@ -229,39 +217,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded (100 requests per 30-second window).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    EstimateId:
-      name: estimateId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Unique identifier of the estimate.
-    ODataCount:
-      name: $count
-      in: query
-      description: When true, include the total record count in the x-odata-total-count response header.
-      schema:
-        type: boolean
-    ODataSkip:
-      name: $skip
-      in: query
-      description: Number of records to skip for pagination.
-      schema:
-        type: integer
-        minimum: 0
-    ODataOrderBy:
-      name: $orderBy
-      in: query
-      description: OData orderBy expression (e.g. fieldName asc, fieldName desc).
-      schema:
-        type: string
-    ODataFilter:
-      name: $filter
-      in: query
-      description: OData filter expression (operators include eq, gt, lt, contains, in).
-      schema:
-        type: string
     ODataTop:
       name: $top
       in: query
@@ -269,6 +237,38 @@ components:
       schema:
         type: integer
         minimum: 1
+    ODataOrderBy:
+      name: $orderBy
+      in: query
+      description: OData orderBy expression (e.g. fieldName asc, fieldName desc).
+      schema:
+        type: string
+    EstimateId:
+      name: estimateId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier of the estimate.
+    ODataSkip:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination.
+      schema:
+        type: integer
+        minimum: 0
+    ODataFilter:
+      name: $filter
+      in: query
+      description: OData filter expression (operators include eq, gt, lt, contains, in).
+      schema:
+        type: string
+    ODataCount:
+      name: $count
+      in: query
+      description: When true, include the total record count in the x-odata-total-count response header.
+      schema:
+        type: boolean
   securitySchemes:
     SubscriptionKey:
       type: apiKey
