@@ -256,6 +256,8 @@ apis:
   - type: RateLimits
     url: rate-limits/buildxact-rate-limits.yml
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/buildxact/overview
   - type: RateLimits
     url: rate-limits/buildxact-rate-limits.yml
   - type: FinOps
