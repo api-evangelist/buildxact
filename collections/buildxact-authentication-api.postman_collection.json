@@ -1,420 +1,474 @@
 {
+  "info": {
+    "_postman_id": "c90016b6-fa42-4c8a-8628-25beb72094a4",
+    "name": "Buildxact Public Authentication API",
+    "description": "Buildxact's public REST API for residential construction estimating and job management.\n\nContact Support:\n Name: Buildxact API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:09:12.000Z",
+    "updatedAt": "2026-10-22T03:09:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c90016b6-fa42-4c8a-8628-25beb72094a4"
+  },
   "item": [
     {
-      "id": "8eb217f1-bc4a-4402-8eb5-a48d2077787c",
-      "name": "Authentication",
-      "description": {
-        "content": "First-party login and bearer token refresh.",
-        "type": "text/plain"
-      },
+      "name": "accounts",
       "item": [
         {
-          "id": "3ddbd675-0b1c-462d-b892-a84fcbcc4e47",
-          "name": "Login and Obtain Bearer Token",
-          "request": {
-            "name": "Login and Obtain Bearer Token",
-            "description": {
-              "content": "Exchange a Buildxact user email and plaintext API key for a short-lived bearer token plus refresh token. The subscription key header is still required to route the request through API Management.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "accounts",
-                "auth",
-                "login"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "Ocp-Apim-Subscription-Key"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "auth",
+          "item": [
             {
-              "id": "47189ee9-9603-478a-86bc-fb1e27fd037a",
-              "name": "Authentication succeeded.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "accounts",
-                    "auth",
-                    "login"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Ocp-Apim-Subscription-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "login",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Login and Obtain Bearer Token",
+                  "id": "55fdc752-d8df-4d3f-9964-a4bd0dcba60f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Ocp-Apim-Subscription-Key",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/auth/login",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        "auth",
+                        "login"
+                      ]
+                    },
+                    "description": "Exchange a Buildxact user email and plaintext API key for a short-lived bearer token plus refresh token. The subscription key header is still required to route the request through API Management."
+                  },
+                  "response": [
+                    {
+                      "id": "647767c0-89d7-47d0-9b21-394045f55c17",
+                      "name": "Authentication succeeded.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Ocp-Apim-Subscription-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/auth/login",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            "auth",
+                            "login"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"accessToken\": \"<string>\",\n  \"refreshToken\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"tokenType\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:09:13.000Z",
+                      "updatedAt": "2026-10-22T03:09:13.000Z",
+                      "uid": "35240-647767c0-89d7-47d0-9b21-394045f55c17"
+                    },
+                    {
+                      "id": "f5ac3aef-efa5-4da6-b272-1dba03d1895b",
+                      "name": "Missing or invalid credentials.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Ocp-Apim-Subscription-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/auth/login",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            "auth",
+                            "login"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:09:13.000Z",
+                      "updatedAt": "2026-10-22T03:09:13.000Z",
+                      "uid": "35240-f5ac3aef-efa5-4da6-b272-1dba03d1895b"
+                    },
+                    {
+                      "id": "a4f3f6bf-45c6-4348-97e0-af72aeb94fe3",
+                      "name": "Rate limit exceeded (100 requests per 30-second window).",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Ocp-Apim-Subscription-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/auth/login",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            "auth",
+                            "login"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:09:13.000Z",
+                      "updatedAt": "2026-10-22T03:09:13.000Z",
+                      "uid": "35240-a4f3f6bf-45c6-4348-97e0-af72aeb94fe3"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:09:13.000Z",
+                  "updatedAt": "2026-10-22T03:09:13.000Z",
+                  "uid": "35240-55fdc752-d8df-4d3f-9964-a4bd0dcba60f"
                 }
               ],
-              "body": "{\n  \"accessToken\": \"string\",\n  \"refreshToken\": \"string\",\n  \"expiresIn\": 5497,\n  \"tokenType\": \"Bearer\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "e710f049-3eca-471b-aeba-c24552f7cdba",
+              "createdAt": "2026-10-22T03:09:13.000Z",
+              "updatedAt": "2026-10-22T03:09:13.000Z",
+              "uid": "35240-e710f049-3eca-471b-aeba-c24552f7cdba"
             },
             {
-              "id": "5639d994-8ac5-4ba1-bbfc-d05c02ae2c73",
-              "name": "Missing or invalid credentials.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "accounts",
-                    "auth",
-                    "login"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Ocp-Apim-Subscription-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "name": "refresh-token",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Refresh Bearer Token",
+                  "id": "3b89b697-bf6a-4f4e-9c90-6e1c83fa2a02",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Ocp-Apim-Subscription-Key",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/auth/refresh-token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        "auth",
+                        "refresh-token"
+                      ]
+                    },
+                    "description": "Exchange a refresh token for a new short-lived access token without re-prompting the user for credentials."
+                  },
+                  "response": [
+                    {
+                      "id": "60851b71-2aee-4607-bd01-4f4b40fc0286",
+                      "name": "New access token issued.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Ocp-Apim-Subscription-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/auth/refresh-token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            "auth",
+                            "refresh-token"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"accessToken\": \"<string>\",\n  \"refreshToken\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"tokenType\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:09:13.000Z",
+                      "updatedAt": "2026-10-22T03:09:13.000Z",
+                      "uid": "35240-60851b71-2aee-4607-bd01-4f4b40fc0286"
+                    },
+                    {
+                      "id": "c9aae7b9-313b-4719-bbad-f5bd88bff956",
+                      "name": "Missing or invalid credentials.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Ocp-Apim-Subscription-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/auth/refresh-token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            "auth",
+                            "refresh-token"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:09:13.000Z",
+                      "updatedAt": "2026-10-22T03:09:13.000Z",
+                      "uid": "35240-c9aae7b9-313b-4719-bbad-f5bd88bff956"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:09:13.000Z",
+                  "updatedAt": "2026-10-22T03:09:13.000Z",
+                  "uid": "35240-3b89b697-bf6a-4f4e-9c90-6e1c83fa2a02"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8f8ee8bb-8292-4c48-b18a-4d4056c09752",
-              "name": "Rate limit exceeded (100 requests per 30-second window).",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "accounts",
-                    "auth",
-                    "login"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Ocp-Apim-Subscription-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"apiKey\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "3b4e8d54-a218-4aee-b3a6-0f4bc98a8cda",
+              "createdAt": "2026-10-22T03:09:13.000Z",
+              "updatedAt": "2026-10-22T03:09:13.000Z",
+              "uid": "35240-3b4e8d54-a218-4aee-b3a6-0f4bc98a8cda"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6e69b685-45ca-42c0-a0b5-a647a65d070f",
-          "name": "Refresh Bearer Token",
-          "request": {
-            "name": "Refresh Bearer Token",
-            "description": {
-              "content": "Exchange a refresh token for a new short-lived access token without re-prompting the user for credentials.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "accounts",
-                "auth",
-                "refresh-token"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "Ocp-Apim-Subscription-Key"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "6004224c-0e0b-48cf-932c-faac04f9bfb6",
-              "name": "New access token issued.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "accounts",
-                    "auth",
-                    "refresh-token"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Ocp-Apim-Subscription-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"accessToken\": \"string\",\n  \"refreshToken\": \"string\",\n  \"expiresIn\": 5497,\n  \"tokenType\": \"Bearer\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7b822ea4-4789-4d98-8f02-edb5a36e0211",
-              "name": "Missing or invalid credentials.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "accounts",
-                    "auth",
-                    "refresh-token"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Ocp-Apim-Subscription-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"refreshToken\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "21f921a7-26d2-4018-b902-7bed85129f3f",
+          "createdAt": "2026-10-22T03:09:13.000Z",
+          "updatedAt": "2026-10-22T03:09:13.000Z",
+          "uid": "35240-21f921a7-26d2-4018-b902-7bed85129f3f"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.buildxact.com",
-      "key": "baseUrl"
+      "id": "08a3668e-b24e-490e-b0fb-bbc3f153922e",
+      "createdAt": "2026-10-22T03:09:13.000Z",
+      "updatedAt": "2026-10-22T03:09:13.000Z",
+      "uid": "35240-08a3668e-b24e-490e-b0fb-bbc3f153922e"
     }
   ],
   "auth": {
@@ -422,25 +476,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Ocp-Apim-Subscription-Key"
+        "value": "Ocp-Apim-Subscription-Key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e953a212-edcc-4f91-86ec-8c57460d47b6",
-    "name": "Buildxact Public Authentication API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Buildxact's public REST API for residential construction estimating and job management. The API is fronted by Azure API Management and requires both an Ocp-Apim-Subscription-Key (identifying the partner / customer organization) and an Authorization: Bearer access token (identifying the specific user and tenant). Endpoints follow REST conventions with OData query support: $filter (operators include eq, gt, lt, contains, in), $orderBy with asc/desc, $top, $skip, and $count=true (record total returned in the x-odata-total-count response header). A short-lived access token is obtained via the accounts/auth/login endpoint and may be refreshed via accounts/auth/refresh-token. Rate-limited at 100 requests per 30-second window. A separate UAT/staging environment is available at developer-uat.buildxact.com for integration testing.\n\nContact Support:\n Name: Buildxact API Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.buildxact.com"
     }
-  }
+  ]
 }

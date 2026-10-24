@@ -1,101 +1,96 @@
 {
+  "info": {
+    "_postman_id": "e8e7f26e-78bc-43b0-8f71-a970959e22e6",
+    "name": "Buildxact Public Tax Context API",
+    "description": "Buildxact's public REST API for residential construction estimating and job management.\n\nContact Support:\n Name: Buildxact API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:09:38.000Z",
+    "updatedAt": "2026-10-22T03:09:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e8e7f26e-78bc-43b0-8f71-a970959e22e6"
+  },
   "item": [
     {
-      "id": "6ac2b24d-449c-4fc1-8811-0ad160d05bf1",
-      "name": "Tax Context",
-      "description": {
-        "content": "Tax rates and inclusivity rules applied to estimate totals.",
-        "type": "text/plain"
-      },
+      "name": "tax-rates",
       "item": [
         {
-          "id": "1a87dacc-bd4e-4b4f-bd39-62dd19455704",
           "name": "List Tax Rates",
+          "id": "ff089438-f541-450a-bb40-4a34c456b2f5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List Tax Rates",
-            "description": {
-              "content": "Return the tax rates available to the authenticated tenant, used to interpret tax-inclusive and tax-exclusive totals on estimates and estimate items.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tax-rates"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/tax-rates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tax-rates"
+              ]
+            },
+            "description": "Return the tax rates available to the authenticated tenant, used to interpret tax-inclusive and tax-exclusive totals on estimates and estimate items."
           },
           "response": [
             {
-              "id": "0d20e14b-67e1-455a-be15-0180f83814fd",
+              "id": "3ebacd03-8b2a-4c16-abc1-321436c0bff2",
               "name": "Tax rate collection.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "tax-rates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Ocp-Apim-Subscription-Key",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/tax-rates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tax-rates"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"rate\": 4409.777023286701,\n    \"isDefault\": false\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"rate\": 772.540298152663,\n    \"isDefault\": true\n  }\n]",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"rate\": \"<double>\",\n    \"isDefault\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"rate\": \"<double>\",\n    \"isDefault\": \"<boolean>\"\n  }\n]",
+              "createdAt": "2026-10-22T03:09:39.000Z",
+              "updatedAt": "2026-10-22T03:09:39.000Z",
+              "uid": "35240-3ebacd03-8b2a-4c16-abc1-321436c0bff2"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T03:09:39.000Z",
+          "updatedAt": "2026-10-22T03:09:39.000Z",
+          "uid": "35240-ff089438-f541-450a-bb40-4a34c456b2f5"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.buildxact.com",
-      "key": "baseUrl"
+      "id": "2407e636-7df0-4a8b-88d8-226782ad96c7",
+      "createdAt": "2026-10-22T03:09:39.000Z",
+      "updatedAt": "2026-10-22T03:09:39.000Z",
+      "uid": "35240-2407e636-7df0-4a8b-88d8-226782ad96c7"
     }
   ],
   "auth": {
@@ -103,25 +98,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Ocp-Apim-Subscription-Key"
+        "value": "Ocp-Apim-Subscription-Key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "f0f05999-b080-48e2-bbdf-829ff51c7127",
-    "name": "Buildxact Public Authentication Tax Context API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Buildxact's public REST API for residential construction estimating and job management. The API is fronted by Azure API Management and requires both an Ocp-Apim-Subscription-Key (identifying the partner / customer organization) and an Authorization: Bearer access token (identifying the specific user and tenant). Endpoints follow REST conventions with OData query support: $filter (operators include eq, gt, lt, contains, in), $orderBy with asc/desc, $top, $skip, and $count=true (record total returned in the x-odata-total-count response header). A short-lived access token is obtained via the accounts/auth/login endpoint and may be refreshed via accounts/auth/refresh-token. Rate-limited at 100 requests per 30-second window. A separate UAT/staging environment is available at developer-uat.buildxact.com for integration testing.\n\nContact Support:\n Name: Buildxact API Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.buildxact.com"
     }
-  }
+  ]
 }
