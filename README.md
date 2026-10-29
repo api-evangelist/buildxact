@@ -1,4 +1,4 @@
-# Buildxact (buildxact)
+# Buildxact
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,121 +66,175 @@
 
 Buildxact is a Melbourne, Australia-headquartered construction estimating and project management SaaS for residential builders, remodelers, trade contractors, and building-material suppliers. Founded in 2011, the company operates regional offices in Austin, Texas (North America), and serves customers across Australia, New Zealand, the United Kingdom, the United States, and Canada. The platform spans the full residential job lifecycle — lead capture, digital takeoffs, AI-assisted estimating ("Blu"), customer quoting and e-signatures, supplier/dealer price-list integration, purchase orders, scheduling (Gantt), timesheets, variations/change orders, invoicing, and two-way accounting sync with Xero and QuickBooks Online. Buildxact exposes a public REST API and webhook surface at developer.buildxact.com, available to Merchant and Manufacturer partners as well as customer subscribers, using a Microsoft Azure API Management gateway (Ocp-Apim-Subscription-Key + bearer token). Endpoints support OData filtering and sorting, with a separate UAT/staging environment. In 2024, Autodesk announced an agreement to acquire Buildxact, positioning the product as a residential construction front-end alongside Autodesk's broader AEC portfolio.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/buildxact/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/buildxact/refs/heads/main/apis.yml)
+**Areas:** Construction · Residential Construction · Construction Management · Estimating · Takeoffs · Job Management · Project Management · Quoting · Scheduling · Purchase Orders · Invoicing · Supplier Integration
 
-## Scope
+## Buildxact on APIs.io
 
-- **Type:** Provider
-- **Position:** Provider
-- **Access:** 3rd-Party
+Everything profiled for Buildxact is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/buildxact/](https://apis.io/providers/buildxact/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (5)
 
-- Construction
-- Residential Construction
-- Construction Management
-- Estimating
-- Takeoffs
-- Job Management
-- Project Management
-- Quoting
-- Scheduling
-- Purchase Orders
-- Invoicing
-- Supplier Integration
-- Material Pricing
-- Builders
-- Remodelers
-- Trades
-- SaaS
-- Australia
-- Autodesk
+- [Buildxact Webhooks](https://apis.io/apis/buildxact/buildxact-webhooks/) — Buildxact's webhook surface lets partner and customer integrations receive real-time notifications when events occur inside the construction-management…
+- [Buildxact Authentication API](https://apis.io/apis/buildxact/buildxact-authentication-api/) — First-party login and bearer token refresh.
+- [Buildxact Estimate Items API](https://apis.io/apis/buildxact/buildxact-estimate-items-api/) — Line items inside an estimate (materials, labor, assemblies).
+- [Buildxact Estimates API](https://apis.io/apis/buildxact/buildxact-estimates-api/) — Construction estimates — the top-level pricing document for a job.
+- [Buildxact Tax Context API](https://apis.io/apis/buildxact/buildxact-tax-context-api/) — Tax rates and inclusivity rules applied to estimate totals.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-25
-- **Modified:** 2026-05-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Buildxact Public API
+Event-driven and webhook contracts.
 
-Buildxact's public REST API exposes core construction-job data including estimates and estimate items, with related tax-context and reference data. The API is fronted by Azure API Management; every request must carry an Ocp-Apim-Subscription-Key header identifying the partner organization and an Authorization: Bearer access token scoped to a Buildxact user and tenant. Endpoints follow REST conventions with OData query support — $filter, $orderBy, $top, $skip, and $count=true (record total returned via the x-odata-total-count response header). A staging environment is available at developer-uat.buildxact.com. Rate-limited at 100 requests per 30-second window.
+- [Buildxact Webhooks](https://apis.io/asyncapis/buildxact/buildxact-webhooks-asyncapi/)
 
-- **Human URL:** [https://developer.buildxact.com/apis](https://developer.buildxact.com/apis)
-- **Base URL:** `https://api.buildxact.com`
+#### Event channels (3)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- Construction
-- Estimates
-- Estimate Items
-- REST
-- OData
+- [estimate.accepted](https://apis.io/channels/buildxact/estimate-accepted/)
+- [lead.created](https://apis.io/channels/buildxact/lead-created/)
+- [lead.updated](https://apis.io/channels/buildxact/lead-updated/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://developer.buildxact.com/getting-started)
-- [Documentation](https://developer.buildxact.com/apis)
-- [Documentation](https://developer.buildxact.com/estimate-data)
-- [Authentication](https://developer.buildxact.com/authorization)
-- [Sign Up](https://developer.buildxact.com/signup)
-- [Plans](https://developer.buildxact.com/plans)
-- [Help Center](https://help.buildxact.com/en/articles/4510284-buildxact-application-programming-interface-api)
-- [OpenAPI](openapi/buildxact-public-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/buildxact-public-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/buildxact-public-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/buildxact-estimate-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/buildxact-estimate-item-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/buildxact-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Vocabulary](vocabulary/buildxact-vocabulary.yml)
-- [Rate Limits](rate-limits/buildxact-rate-limits.yml)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Buildxact Webhooks
+- [Buildxact Agentic Access](https://apis.io/agentic-access/buildxact/buildxact-agentic-access/)
 
-Buildxact's webhook surface lets partner and customer integrations receive real-time notifications when events occur inside the construction-management platform — including Estimate Accepted, Lead Created, and Lead Updated, plus additional event types reserved for Merchant and Manufacturer plan tiers. Webhooks are registered from the "My Business > API" panel of the Buildxact web app: provide a destination URL, choose events, store the signing secret used to verify payload authenticity, and inspect deliveries via the built-in Event Log. Payloads are JSON over HTTPS.
+#### JSON Schema (2)
 
-- **Human URL:** [https://developer.buildxact.com/webhooks](https://developer.buildxact.com/webhooks)
+The data models the API reads and writes.
 
-#### Tags
+- [Buildxact Estimate](https://apis.io/schemas/buildxact/buildxact-estimate/)
+- [Buildxact Estimate Item](https://apis.io/schemas/buildxact/buildxact-estimate-item/)
 
-- Webhooks
-- Events
-- Estimates
-- Leads
-- Event-Driven
+#### JSON-LD (1)
 
-#### Properties
+Linked-data contexts for the provider's vocabulary.
 
-- [Documentation](https://developer.buildxact.com/webhooks)
-- [AsyncAPI](asyncapi/buildxact-webhooks-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/buildxact-public-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/buildxact-public-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Buildxact Context](https://apis.io/jsonld/buildxact/buildxact-context/)
 
-## Common Properties
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Buildxact Vocabulary](https://apis.io/vocabularies/buildxact/buildxact-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Buildxact Estimate Accepted Event Example](https://apis.io/examples/buildxact/buildxact-estimate-accepted-event-example/)
+- [Buildxact List Estimates Example](https://apis.io/examples/buildxact/buildxact-list-estimates-example/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Buildxact Public Authentication API](https://apis.io/collections/buildxact/open-buildxact-authentication-api/)
+- [Buildxact Public Authentication Estimate Items API](https://apis.io/collections/buildxact/open-buildxact-estimate-items-api/)
+- [Buildxact Public Authentication Estimates API](https://apis.io/collections/buildxact/open-buildxact-estimates-api/)
+- [Buildxact Public API](https://apis.io/collections/buildxact/open-buildxact-public-api/)
+- [Buildxact Public Authentication Tax Context API](https://apis.io/collections/buildxact/open-buildxact-tax-context-api/)
+
+#### Governance rules (3)
+
+Spectral rulesets for the provider's contracts.
+
+- [Buildxact — asyncapi rules](https://apis.io/rules/buildxact/buildxact-asyncapi-spectral-rules/)
+- [Buildxact — jsonschema rules](https://apis.io/rules/buildxact/buildxact-jsonschema-spectral-rules/)
+- [Buildxact API Rules](https://apis.io/rules/buildxact/buildxact-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Buildxact Authentication](https://apis.io/security/buildxact/buildxact-authentication/)
+- [Buildxact Domain Security](https://apis.io/security/buildxact/buildxact-domain-security/)
+- [Buildxact Vulnerability Disclosure](https://apis.io/security/buildxact/buildxact-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Buildxact Plans Pricing](https://apis.io/plans/buildxact/buildxact-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Buildxact Rate Limits](https://apis.io/rate-limits/buildxact/buildxact-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Buildxact Finops](https://apis.io/finops/buildxact/buildxact-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.buildxact.com)
-- [Australia Site](https://www.buildxact.com/au/)
-- [U S Site](https://www.buildxact.com/us/)
-- [U K Site](https://www.buildxact.com/uk/)
-- [Developer Portal](https://developer.buildxact.com)
-- [Help Center](https://help.buildxact.com)
-- [A P I Help Article](https://help.buildxact.com/en/articles/4510284-buildxact-application-programming-interface-api)
 - [Pricing](https://www.buildxact.com/us/pricing/)
-- [Plans](https://help.buildxact.com/en/articles/11559145-which-buildxact-subscription-plan-is-right-for-my-business)
-- [Integrations](https://www.buildxact.com/au/features/integrations/)
-- [Accounting Integrations](https://www.buildxact.com/us/features/construction-accounting-software/)
-- [Blu A I](https://www.buildxact.com/us/features/blu/)
-- [Company](https://www.buildxact.com/au/company/)
 - [Blog](https://www.buildxact.com/us/blog/)
-- [Contact](https://www.buildxact.com/us/contact/)
-- [Trial](https://www.buildxact.com/us/free-trial/)
-- [LinkedIn](https://au.linkedin.com/company/buildxact)
-- [Git Hub](https://github.com/Buildxact)
-- [Terms of Service](https://www.buildxact.com/au/terms-of-use/)
-- [Privacy Policy](https://www.buildxact.com/au/privacy-policy/)
+- [Terms of service](https://www.buildxact.com/au/terms-of-use/)
+- [Privacy policy](https://www.buildxact.com/au/privacy-policy/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 47.3** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 66.7 |
+| Contract governance | 27.3 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 39.3 |
+| Access clarity | 50.0 |
+
+**Agent readiness 21.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 26.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/buildxact/](https://apis.io/providers/buildxact/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Buildxact: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/buildxact/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
